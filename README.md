@@ -2,11 +2,11 @@
 
 > [!NOTE] In this file you can find the structure to use to document your app as a product in the README.md file. Along the file you will find guidelines that you can delete or comment
 
-# _[your product name]_ Development Report
+# _BioCatcher_ Development Report
 
-Welcome to the documentation pages of the _[your product name]_!
+Welcome to the documentation pages of the _BioCatcher_!
 
-You can find here details about the _[your product name]_, from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by type of activities: 
+You can find here details about the _BioCatcher_, from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by type of activities: 
 
 * [Business modeling](#Business-Modelling) 
   * [Product Vision](#Product-Vision)
