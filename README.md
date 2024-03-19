@@ -21,11 +21,7 @@ You can find here details about the _BioCatcher_, from a high-level vision to lo
   * [Vertical prototype](#Vertical-Prototype)
 * [Project management](#Project-Management)
 
-Contributions are expected to be made exclusively by the initial team, but we may open them to the community, after the course, in all areas and topics: requirements, technologies, development, experimentation, testing, etc.
-
-Please contact us!
-
-Thank you!
+Made by:
 
  - Ismael Moniz - up202206871@up.pt
  - Gabriel Lima - up202206693@up.pt
