@@ -38,6 +38,7 @@ BioCatcher is an educational game that tries to make learning about animals fun 
 Our product engages the user with animals characteristics in order to win battles agains other user's animals.
 
 > Original Indications
+
 Start by defining a clear and concise vision for your app, to help members of the team, contributors, and users into focusing their often disparate views into a concise, visual, and short textual form. It provides a "high concept" of the product for marketers, developers, and managers.
 
 A product vision describes the essential of the product and sets the direction to where a product is headed, and what the product will deliver in the future. 
@@ -68,6 +69,7 @@ To learn more about how to write a good product vision, please see also:
 
 
 > Original Indications
+
 Indicate an  initial/tentative list of high-level features - high-level capabilities or desired services of the system that are necessary to deliver benefits to the users.
  - Feature XPTO - a few words to briefly describe the feature
  - Feature ABCD - ...
