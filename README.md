@@ -27,7 +27,8 @@ Please contact us!
 
 Thank you!
 
-*team members names and emails*
+Ismael Moniz: hismamoniz@gmail.com
+
 
 ---
 ## Business Modelling
