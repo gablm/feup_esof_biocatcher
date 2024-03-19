@@ -1,7 +1,5 @@
 <!-- Template file for README.md for LEIC-ES-2023-24 -->
 
-> [!NOTE] In this file you can find the structure to use to document your app as a product in the README.md file. Along the file you will find guidelines that you can delete or comment
-
 # _BioCatcher_ Development Report
 
 Welcome to the documentation pages of the _BioCatcher_!
@@ -35,14 +33,11 @@ Made by:
 
 ### Product Vision
 
-> Temp product vision
-
 For the general public, who find learning the convencional way boring
 BioCatcher is an educational game that tries to make learning about animals fun unlike Wikipedia/Encyclopedias.
 Our product engages the user with animals characteristics in order to win battles agains other user's animals.
 
-> end
-
+> Original Indications
 
 Start by defining a clear and concise vision for your app, to help members of the team, contributors, and users into focusing their often disparate views into a concise, visual, and short textual form. It provides a "high concept" of the product for marketers, developers, and managers.
 
@@ -58,15 +53,30 @@ To learn more about how to write a good product vision, please see also:
 * [Vision, by scrumbook.org](http://scrumbook.org/value-stream/vision.html)
 * [How to write a vision, by dummies.com](https://www.dummies.com/business/marketing/branding/how-to-write-vision-and-mission-statements-for-your-brand/)
 * [20 Inspiring Vision Statement Examples (2019 Updated), by lifehack.org](https://www.lifehack.org/articles/work/20-sample-vision-statement-for-the-new-startup.html)
-
+> end
 
 ### Features and Assumptions
+
+#### Features
+- Login - Allows the user to keep their progress
+- Battle - Allows the user to engage in battles between animals
+- BioDex - Stores the user's animals and shows their characteristics
+- Clans?
+- 
+
+#### Dependencies
+- Google Oauth - easier login to the platform
+
+
+> Original Indications
+
 Indicate an  initial/tentative list of high-level features - high-level capabilities or desired services of the system that are necessary to deliver benefits to the users.
  - Feature XPTO - a few words to briefly describe the feature
  - Feature ABCD - ...
 ...
 
 Optionally, indicate an initial/tentative list of assumptions that you are doing about the app and dependencies of the app to other systems.
+> end
 
 ### Elevator Pitch
 Draft a small text to help you quickly introduce and describe your product in a short time (lift travel time ~90 seconds) and a few words (~800 characters), a technique usually known as elevator pitch.
