@@ -28,6 +28,7 @@ Please contact us!
 Thank you!
 
 Ismael Moniz: hismamoniz@gmail.com
+Gabriel Lima: up202206693@up.pt
 
 
 ---
