@@ -70,8 +70,6 @@ Take a look at the following links to learn some techniques:
 
 ## Requirements
 
-In this section, you should describe all kinds of requirements for your module: functional and non-functional requirements.
-
 ### User stories
 
 [Go to board](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/4/)
