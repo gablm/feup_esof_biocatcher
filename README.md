@@ -27,13 +27,10 @@ Please contact us!
 
 Thank you!
 
-Ismael Moniz: up202206871@up.pt
-
-Gabriel Lima: up202206693@up.pt
-
-Francisco Bettencourt: up202105288@up.pt
-
-Francisco Fernandes : up202104843@up.pt
+ - Ismael Moniz - up202206871@up.pt
+ - Gabriel Lima - up202206693@up.pt
+ - Francisco Bettencourt - up202105288@up.pt
+ - Francisco Fernandes - up202104843@up.pt
 
 
 
