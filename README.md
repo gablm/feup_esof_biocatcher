@@ -1,7 +1,5 @@
 <!-- Template file for README.md for LEIC-ES-2023-24 -->
 
-> [!NOTE] In this file you can find the structure to use to document your app as a product in the README.md file. Along the file you will find guidelines that you can delete or comment
-
 # _BioCatcher_ Development Report
 
 Welcome to the documentation pages of the _BioCatcher_!
