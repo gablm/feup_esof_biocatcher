@@ -45,7 +45,6 @@ Learning about animals made fun, we bring nature to your fingertips.
 - Lootboxes - Box opening system to collect animals (gambling mechanic)
 - Interactive map - Map of Portugal divided by regions where you can check their respective fauna and look up your completion for each region.
 - Animal cards - Each animal has a card that gives information about their stats, level and general information about conservation status, average weight, longevity, etc.
-- Alternative chinese map and version - For our chinese users and investors we have an alternate map. 
 
 #### Dependencies
 - Google Oauth - easier login to the platform
