@@ -39,6 +39,7 @@ Learning about animals made fun, we bring nature to your fingertips.
 ### Features and Assumptions
 
 #### Features
+
 - Login - Allows the user to keep their progress
 - Battle - Allows the user to engage in battles between animals
 - BioDex - Stores the user's animals and shows their characteristics
@@ -47,18 +48,14 @@ Learning about animals made fun, we bring nature to your fingertips.
 - Animal cards - Each animal has a card that gives information about their stats, level and general information about conservation status, average weight, longevity, etc.
 
 #### Dependencies
+
 - Google Oauth - easier login to the platform
 - OpenMap
 - Twitter API
 
 
 ### Elevator Pitch
-Draft a small text to help you quickly introduce and describe your product in a short time (lift travel time ~90 seconds) and a few words (~800 characters), a technique usually known as elevator pitch.
-
-Take a look at the following links to learn some techniques:
-* [Crafting an Elevator Pitch](https://www.mindtools.com/pages/article/elevator-pitch.htm)
-* [The Best Elevator Pitch Examples, Templates, and Tactics - A Guide to Writing an Unforgettable Elevator Speech, by strategypeak.com](https://strategypeak.com/elevator-pitch-examples/)
-* [Top 7 Killer Elevator Pitch Examples, by toggl.com](https://blog.toggl.com/elevator-pitch-examples/)
+Embark on an adventure to discover Portugal's rich biodiversity with BioCatcher, the app that turns our native fauna into an exciting journey. From the majestic iberian lynx to the slender lusitanian salamander, embark on quests to collect  and learn more about the creatures that hide in Portugal's forests, rivers and seas. But it's more than a game - it's a platform where everyone can learn and educate themselves about wildlife and contribute to conservation efforts while having fun! There are so many interesting animals to discover, come and start your journey now!
 
 
 ## Requirements
