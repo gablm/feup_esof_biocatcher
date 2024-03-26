@@ -1,6 +1,6 @@
-# biocatcher
+# test_app
 
-Life is a game.
+A new Flutter project.
 
 ## Getting Started
 

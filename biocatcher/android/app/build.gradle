@@ -2,12 +2,6 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id 'com.google.gms.google-services'
-}
-
-dependencies {
-    implementation platform('com.google.firebase:firebase-bom:32.7.4')
-    implementation 'com.google.firebase:firebase-analytics'
 }
 
 def localProperties = new Properties()
@@ -29,8 +23,8 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.biocatcher.app.biocatcher"
-    compileSdkVersion flutter.compileSdkVersion
+    namespace "com.biocatcher.app"
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -40,10 +34,10 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.biocatcher.app.biocatcher"
+        applicationId "com.biocatcher.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 20
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
