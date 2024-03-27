@@ -9,6 +9,21 @@ class MenuSection extends StatefulWidget {
 }
 
 class MenuState extends State<MenuSection> {
+
+  Future<void> logOut() async {
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+            child: CircularProgressIndicator()
+        ),
+        barrierDismissible: false);
+    await FirebaseAuth.instance.signOut();
+    if (context.mounted) {
+      Navigator.pop(context);
+      Navigator.pushNamed(context, "/");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -33,12 +48,7 @@ class MenuState extends State<MenuSection> {
                 "Log out",
                 style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
               ),
-              onPressed: () async {
-                  await FirebaseAuth.instance.signOut();
-                  if (context.mounted) {
-                    Navigator.pushNamed(context, "/");
-                  }
-                },
+              onPressed: () async => logOut(),
             )
           ],
         )

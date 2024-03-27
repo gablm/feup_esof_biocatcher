@@ -45,6 +45,12 @@ class LoginState extends State<LoginPage> {
   }
 
   void tryToSignIn(String type) async {
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator()
+        ),
+        barrierDismissible: false);
     try {
       switch(type) {
         case 'Google':
@@ -57,16 +63,20 @@ class LoginState extends State<LoginPage> {
           await signInWithEmailAndPassword();
           break;
       }
-      if (FirebaseAuth.instance.currentUser != null) {
-        if (context.mounted) {
-          Navigator.pushNamed(context, "/main");
-        }
+
+      if (FirebaseAuth.instance.currentUser == null) {
+        throw FirebaseAuthException(code: "invalid-user");
+      }
+
+      if (context.mounted) {
+        Navigator.pop(context);
+        Navigator.pushNamed(context, "/main");
       }
     } on FirebaseAuthException catch (e) {
       if (!context.mounted) {
         return;
       }
-      print(e.code);
+
       String error = switch (e.code)
       {
         "invalid-credential" => "Invalid user/password",
@@ -75,35 +85,60 @@ class LoginState extends State<LoginPage> {
         "user-disabled" => "Invalid user/password",
         _ => "Unknown error"
       };
+      Navigator.pop(context);
+
+
       FocusManager.instance.primaryFocus?.unfocus();
-      ScaffoldMessenger.of(context).clearMaterialBanners();
-      ScaffoldMessenger.of(context).showMaterialBanner(
-          MaterialBanner(
-            content: Text(
+      showDialog(context: context, builder: (context) => Center(
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.red
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.warning,
+                color: Colors.white,
+                size: 50,
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "There was an issue during login",
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    decoration: TextDecoration.none,
+                    backgroundColor: Colors.red,
+                    fontSize: 15
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
                 error,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
-                  fontSize: 18,
-                )
-            ),
-            leading: Icon(
-              Icons.report_gmailerrorred_sharp,
-              color: Theme.of(context).colorScheme.primary,
-              size: 18,
-            ),
-            backgroundColor: Colors.red,
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => ScaffoldMessenger.of(context).clearMaterialBanners(),
-                child: Text('DISMISS',
+                  decoration: TextDecoration.none,
+                  backgroundColor: Colors.red,
+                  fontSize: 20
+                ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "Click anywhere to close",
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary
-                  ),
-                )
+                    color: Theme.of(context).colorScheme.primary,
+                    decoration: TextDecoration.none,
+                    backgroundColor: Colors.red,
+                    fontSize: 10
+                ),
               )
             ]
-          )
-      );
+          ),
+        ),
+      ));
     }
   }
 
