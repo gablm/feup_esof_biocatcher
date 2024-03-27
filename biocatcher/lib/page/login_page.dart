@@ -4,32 +4,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key}) {
-    InitListeners();
-  }
+  LoginPage({super.key});
 
   final TextEditingController idController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void InitListeners() async {
-    FirebaseAuth.instance.authStateChanges()
-        .listen((User? user) {
-        if (user == null) {
-          print('User is currently signed out!');
-        } else {
-          print('User is signed in!');
-        }
-    });
-  }
-
-
   @override
-  State<LoginPage> createState() => MainState();
+  State<LoginPage> createState() => LoginState();
 }
 
-class MainState extends State<LoginPage> {
+class LoginState extends State<LoginPage> {
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -45,6 +30,91 @@ class MainState extends State<LoginPage> {
 
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  Future<void> signInWithTwitter() async {
+    TwitterAuthProvider twitterProvider = TwitterAuthProvider();
+    await FirebaseAuth.instance.signInWithProvider(twitterProvider);
+  }
+
+  Future<void> signInWithEmailAndPassword() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: widget.idController.text,
+        password: widget.passwordController.text
+    );
+  }
+
+  void tryToSignIn(String type) async {
+    try {
+      switch(type) {
+        case 'Google':
+          await signInWithGoogle();
+          break;
+        case 'X':
+          await signInWithTwitter();
+          break;
+        default:
+          await signInWithEmailAndPassword();
+          break;
+      }
+      if (FirebaseAuth.instance.currentUser != null) {
+        if (context.mounted) {
+          Navigator.pushNamed(context, "/main");
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      if (!context.mounted) {
+        return;
+      }
+      print(e.code);
+      String error = switch (e.code)
+      {
+        "invalid-credential" => "Invalid user/password",
+        "invalid-email" => "Invalid user/password",
+        "user-not-found" => "Invalid user/password",
+        "user-disabled" => "Invalid user/password",
+        _ => "Unknown error"
+      };
+      FocusManager.instance.primaryFocus?.unfocus();
+      ScaffoldMessenger.of(context).clearMaterialBanners();
+      ScaffoldMessenger.of(context).showMaterialBanner(
+          MaterialBanner(
+            content: Text(
+                error,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 18,
+                )
+            ),
+            leading: Icon(
+              Icons.report_gmailerrorred_sharp,
+              color: Theme.of(context).colorScheme.primary,
+              size: 18,
+            ),
+            backgroundColor: Colors.red,
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => ScaffoldMessenger.of(context).clearMaterialBanners(),
+                child: Text('DISMISS',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary
+                  ),
+                )
+              )
+            ]
+          )
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (FirebaseAuth.instance.currentUser != null) {
+        Navigator.pushNamed(context, "/main");
+      }
+    });
   }
 
   @override
@@ -144,7 +214,7 @@ class MainState extends State<LoginPage> {
                                   ),
                                   minimumSize: const Size(150, 40),
                                 ),
-                                onPressed: () => {},
+                                onPressed: () => tryToSignIn(""),
                                 child: Text("Login",
                                     style: TextStyle(
                                       color: Theme.of(context).colorScheme.inversePrimary,
@@ -159,14 +229,15 @@ class MainState extends State<LoginPage> {
                         text: "Sign in with Google",
                         logoPath: "assets/google_logo.png",
                         size: const Size(300, 40),
-                        onPressed: () => signInWithGoogle(),
+                        onPressed: () async => tryToSignIn('Google'),
                       ),
                       const SizedBox(height: 10),
-                      const OAuthButton(
+                      OAuthButton(
                         text: "Sign in with X",
                         logoPath: "assets/x_logo_black.png",
                         darkLogoPath: "assets/x_logo_white.png",
-                        size: Size(300, 40),
+                        size: const Size(300, 40),
+                        onPressed: () async => tryToSignIn('X'),
                       ),
                     ]
                 )
