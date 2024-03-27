@@ -19,11 +19,7 @@ class MainState extends State<MainPage> {
       bottomNavigationBar: Container(
         height: 60,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
+          color: Theme.of(context).colorScheme.primary
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
