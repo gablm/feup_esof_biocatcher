@@ -18,9 +18,7 @@ class MapIndicator {
 }
 
 class MapTileProvider implements TileProvider {
-  MapTileProvider({mapPlaces, showBorder = false}) {
-    this.mapPlaces = mapPlaces;
-    this.showBorder = showBorder;
+  MapTileProvider({this.mapPlaces = const {}, this.showBorder = false}) {
     boxPaint.isAntiAlias = true;
     boxPaint.color = Colors.blue;
     boxPaint.strokeWidth = 2.0;

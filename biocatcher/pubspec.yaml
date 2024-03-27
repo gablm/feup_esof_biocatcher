@@ -67,6 +67,9 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/map_style.txt
+    - assets/google_logo.png
+    - assets/x_logo_black.png
+    - assets/x_logo_white.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

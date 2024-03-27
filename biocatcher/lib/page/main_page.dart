@@ -1,8 +1,10 @@
-import 'package:bio_catcher/page/mapPage.dart';
-import 'package:bio_catcher/page/menuPage.dart';
-import 'package:bio_catcher/page/shopPage.dart';
-import 'package:bio_catcher/page/storagePage.dart';
+import 'package:bio_catcher/page/mainSections/map_section.dart';
+import 'package:bio_catcher/page/mainSections/menu_section.dart';
+import 'package:bio_catcher/page/mainSections/shop_section.dart';
+import 'package:bio_catcher/page/mainSections/storage_section.dart';
 import 'package:flutter/material.dart';
+
+import 'mainSections/error_section.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,6 +15,7 @@ class MainPage extends StatefulWidget {
 
 class MainState extends State<MainPage> {
   String page = "map";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,11 +72,11 @@ class MainState extends State<MainPage> {
       ),
       body: switch (page)
       {
-        'map' => MapPage(),
-        'menu' => MenuPage(),
-        'storage' => StoragePage(),
-        'shop' => ShopPage(),
-        _ => MapPage(),
+        'map' => const MapSection(),
+        'menu' => const MenuSection(),
+        'storage' => const StorageSection(),
+        'shop' => const ShopSection(),
+        _ => const ErrorSection(error: 'No information was provided about it'),
       },
     );
   }

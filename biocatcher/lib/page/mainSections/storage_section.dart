@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class StoragePage extends StatefulWidget {
-  const StoragePage({super.key});
+class StorageSection extends StatefulWidget {
+  const StorageSection({super.key});
 
   @override
-  State<StoragePage> createState() => StorageState();
+  State<StorageSection> createState() => StorageState();
 }
 
-class StorageState extends State<StoragePage> {
+class StorageState extends State<StorageSection> {
   @override
   Widget build(BuildContext context) {
     return const Center(

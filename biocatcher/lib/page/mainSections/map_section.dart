@@ -1,16 +1,16 @@
-import 'package:bio_catcher/elements/mapTileProvider.dart';
+import 'package:bio_catcher/elements/map_tile_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapPage extends StatefulWidget {
-  const MapPage({super.key});
+class MapSection extends StatefulWidget {
+  const MapSection({super.key});
 
   @override
-  State<MapPage> createState() => MapState();
+  State<MapSection> createState() => MapState();
 }
 
-class MapState extends State<MapPage> {
+class MapState extends State<MapSection> {
   late final String _mapStyle;
   late final GoogleMapController mapController;
   static const LatLng _ptCenter = LatLng(39.63870516395606, -7.873238660395145);
