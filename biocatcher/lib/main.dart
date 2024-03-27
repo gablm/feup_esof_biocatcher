@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:bio_catcher/page/mainPage.dart';
 import 'package:bio_catcher/page/mapPage.dart';
+import 'package:bio_catcher/page/menuPage.dart';
+import 'package:flutter/material.dart';
 import 'package:bio_catcher/theme/darkMode.dart';
 import 'package:bio_catcher/theme/lightMode.dart';
 
@@ -11,9 +13,12 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: "BioCatcher",
       debugShowCheckedModeBanner: false,
-      home: MapPage(),
       theme: lightMode,
       darkTheme: darkMode,
+      routes: {
+        '/': (context) => MainPage(),
+        '/login': (context) => MainPage(),
+      },
     );
   }
 }
