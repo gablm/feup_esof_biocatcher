@@ -49,9 +49,9 @@ Learning about animals made fun, we bring nature to your fingertips.
 
 #### Dependencies
 
-- Google Oauth - easier login to the platform
-- OpenMap
-- Twitter API
+- Firebase Store - Relational database service
+- Firebase Authentication - Handles user criation and athentication
+- Google Maps API - Used to display the map
 
 
 ### Elevator Pitch
