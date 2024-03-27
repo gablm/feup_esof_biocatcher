@@ -43,7 +43,7 @@ class ErrorState extends State<ErrorSection> {
                       ),
                       const SizedBox(height: 50),
                       ElevatedButton(
-                          onPressed: () => runApp(const App()),
+                          onPressed: () => runApp(App()),
                           child: Text("Go back to BioCatcher",
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.inversePrimary,

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "182996583953",
+    "project_id": "biocatcher-db",
+    "storage_bucket": "biocatcher-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182996583953:android:b3091519ed8b167c81d3b0",
+        "android_client_info": {
+          "package_name": "com.biocatcher.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182996583953-scpc3at7o0ujq08heli36709bv35bhls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBITIfihbY43m6ZgTCN8eF3RnOz7p_3mLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182996583953-scpc3at7o0ujq08heli36709bv35bhls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

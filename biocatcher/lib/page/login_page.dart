@@ -1,18 +1,52 @@
 import 'package:bio_catcher/elements/decorated_text_field.dart';
 import 'package:bio_catcher/elements/oauth_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  LoginPage({super.key}) {
+    InitListeners();
+  }
 
   final TextEditingController idController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  void InitListeners() async {
+    FirebaseAuth.instance.authStateChanges()
+        .listen((User? user) {
+        if (user == null) {
+          print('User is currently signed out!');
+        } else {
+          print('User is signed in!');
+        }
+    });
+  }
+
 
   @override
   State<LoginPage> createState() => MainState();
 }
 
 class MainState extends State<LoginPage> {
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,10 +155,11 @@ class MainState extends State<LoginPage> {
                           ]
                       ),
                       const SizedBox(height: 40),
-                      const OAuthButton(
+                      OAuthButton(
                         text: "Sign in with Google",
                         logoPath: "assets/google_logo.png",
-                        size: Size(300, 40),
+                        size: const Size(300, 40),
+                        onPressed: () => signInWithGoogle(),
                       ),
                       const SizedBox(height: 10),
                       const OAuthButton(

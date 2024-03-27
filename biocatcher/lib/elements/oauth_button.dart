@@ -1,6 +1,3 @@
-
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class OAuthButton extends StatelessWidget {
@@ -8,12 +5,14 @@ class OAuthButton extends StatelessWidget {
   final String logoPath;
   final String? darkLogoPath;
   final Size? size;
+  final void Function()? onPressed;
   const OAuthButton({
     super.key,
     required this.text,
     required this.logoPath,
     this.darkLogoPath,
-    this.size
+    this.size,
+    this.onPressed
   });
 
 
@@ -26,7 +25,7 @@ class OAuthButton extends StatelessWidget {
         backgroundColor: isDark ? Colors.black : Colors.white,
         minimumSize: size
       ),
-      onPressed: () {},
+      onPressed: onPressed ?? () {},
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
         child: Row(
