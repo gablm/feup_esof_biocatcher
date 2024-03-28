@@ -1,3 +1,4 @@
+import 'package:bio_catcher/page/load_page.dart';
 import 'package:bio_catcher/page/login_page.dart';
 import 'package:bio_catcher/page/main_page.dart';
 import 'package:bio_catcher/page/mainSections/error_section.dart';
@@ -18,14 +19,14 @@ class App extends StatelessWidget {
       theme: lightMode,
       darkTheme: darkMode,
       routes: {
-        '/': (context) => LoginPage(),
+        '/': (context) => LoadPage(),
+        '/login': (context) => LoginPage(),
         '/main': (context) => MainPage(),
       },
-      builder: (context, widget) {
+      /*builder: (context, widget) {
         ErrorWidget.builder = (errorDetails) => ErrorSection(error: errorDetails.toStringShort());
-        if (widget != null) return widget;
-        throw StateError('Widget is null');
-      },
+        return widget!;
+      },*/
     );
   }
 }
@@ -53,9 +54,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
   );
-  FlutterError.onError = (FlutterErrorDetails details) {
+  /*FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.dumpErrorToConsole(details);
     runApp(ErrorShower(errorDetails: details));
-  };
+  };*/
   runApp(App());
 }

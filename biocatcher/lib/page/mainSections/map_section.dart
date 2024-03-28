@@ -58,10 +58,10 @@ class MapState extends State<MapSection> {
         zoomControlsEnabled: false,
         tileOverlays: {
           TileOverlay(
-            tileOverlayId: const TileOverlayId("Viseu"),
+            tileOverlayId: const TileOverlayId("ProgressLabels"),
             tileProvider: MapTileProvider(mapPlaces: places),
           )
-        },
+        }
       );
   }
 }
