@@ -94,16 +94,61 @@ While at this phase only the label "Viseu" can be seen, it is possible to implem
 
 <br>
 <br>
-<br>
 
 ## Project management
 You can find below information and references related with the project management in our team: 
 
-* Backlog management: Product backlog and Sprint backlog in a [Github Projects board](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/64);
-* Release management: [v0.0.1 (increment #0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/releases/tag/v0.0.1);
+### Backlog management
+- Product backlog and Sprint backlog in a [Github Projects board](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/64);
+### Release management
+- [v0.0.1 (increment #0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/releases/tag/v0.0.1);
 
-### Sprint planning and retrospectives:
-#### Sprint 0
-  * plans: screenshots of Github Projects board at begin and end of each iteration;
-  * retrospectives: meeting notes in a document in the repository;
+### Sprint planning and retrospectives
+> Clicking any image will open them in full size.
+<table>
+ <thead>
+  <tr>
+   <th rowspan=2>Sprint</th>
+   <th colspan=2>Plans</th>
+   <th rowspan=2>Retrospective</th>
+  </tr>
+  <tr>
+   <th>Backlog before</th>
+   <th>Backlog after</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <th>
+    Sprint 0 (v0.0.1)
+    <br>
+    <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/releases/tag/v0.0.1">Release</a>
+   </th>
+   <td>No board existed at this point.</td>
+   <td>
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/1f92abe5-eada-4a15-a945-b969f4e0eaf7">
+   </td>
+   <td>
+    <ul>
+     <li>System battle needs to be better defined.</li>
+     <li>Sprint 1 will be focused in implementing the animal management and map view part of the app while we conceptualize the battle system.</li>
+    </ul>
+   </td>
+  </tr>
+  <tr>
+   <th>
+    Sprint 1 (v0.1.0)
+   </th>
+   <td>
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/dca4f5ea-cd36-494f-bfd0-3fbdb54af8f1">
+   </td>
+   <td>Nothing yet.</td>
+   <td>
+    <ul>
+     <li>Yet to be.</li>
+    </ul>
+   </td>
+  </tr>
+ </tbody>
+</table>
  
