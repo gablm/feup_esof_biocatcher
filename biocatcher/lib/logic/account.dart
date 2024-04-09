@@ -1,12 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+enum AuthType {
+  password,
+  twitter,
+  google,
+  phone
+}
+
 class Account {
   //#region Properties
   static final Account _instance = Account._privateConstructor();
   static Account get instance => _instance;
   late FirebaseAuth _firebaseAuth;
   User? get currentUser => _firebaseAuth.currentUser;
+  String get userId => _firebaseAuth.currentUser?.uid ?? "";
+  List<UserInfo> get loginMethods => currentUser?.providerData ?? [];
   //#endregion
 
   //#region Private Constructor
@@ -77,4 +86,24 @@ class Account {
     currentUser?.linkWithPhoneNumber(phoneNumber);
   }
   //#endregion
+
+  void deleteAccount()
+  {
+    currentUser?.delete();
+  }
+
+  void unlink(AuthType type)
+  {
+    switch (type)
+    {
+      case AuthType.twitter:
+        currentUser?.unlink("twitter.com");
+        break;
+      case AuthType.google:
+        currentUser?.unlink("google.com");
+        break;
+      default:
+        throw Exception("Invalid unlink type");
+    }
+  }
 }

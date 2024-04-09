@@ -42,6 +42,7 @@ class LoginState extends State<LoginPage> {
       if (Account.instance.currentUser == null) {
         throw FirebaseAuthException(code: "invalid-user");
       }
+
       if (context.mounted) {
         Navigator.pop(context);
         Navigator.pushNamed(context, "/main");

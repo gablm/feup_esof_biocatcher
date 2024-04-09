@@ -23,10 +23,10 @@ class App extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/main': (context) => MainPage(),
       },
-      /*builder: (context, widget) {
+      builder: (context, widget) {
         ErrorWidget.builder = (errorDetails) => ErrorSection(error: errorDetails.toStringShort());
         return widget!;
-      },*/
+      },
     );
   }
 }
@@ -54,9 +54,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
   );
-  /*FlutterError.onError = (FlutterErrorDetails details) {
+  FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.dumpErrorToConsole(details);
     runApp(ErrorShower(errorDetails: details));
-  };*/
+  };
   runApp(App());
 }

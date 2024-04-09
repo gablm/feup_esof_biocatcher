@@ -1,13 +1,9 @@
-import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoadPage extends StatefulWidget {
-  LoadPage({super.key});
+import '../logic/account.dart';
 
-  final TextEditingController idController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+class LoadPage extends StatefulWidget {
+  const LoadPage({super.key});
 
   @override
   State<LoadPage> createState() => LoadState();
@@ -19,8 +15,9 @@ class LoadState extends State<LoadPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(const Duration(seconds: 3));
-      if (FirebaseAuth.instance.currentUser != null) {
+      await Future.delayed(const Duration(seconds: 1));
+      if (!context.mounted) return;
+      if (Account.instance.isSignedIn()) {
         Navigator.pushNamed(context, "/main");
       }
       else {

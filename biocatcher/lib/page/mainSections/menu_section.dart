@@ -28,32 +28,76 @@ class MenuState extends State<MenuSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Column(
           children: [
-            const Text(
-                "Menu",
-                style: TextStyle(fontSize: 80)
+            Text(
+                "UserId ${Account.instance.userId}",
+                style: const TextStyle(
+                  fontSize: 15,
+                )
             ),
-            ElevatedButton(
-              child: Text(
-                  "Throw Test",
-                style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-              ),
-              onPressed: () {
-                throw Exception('Throw test'); },
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              child: Text(
-                "Log out",
-                style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-              ),
-              onPressed: () async => logOut(),
-            )
+            for (UserInfo info in Account.instance.loginMethods)
+              Text(
+                  "${info.providerId} - ${info.uid}" ,
+                  style: const TextStyle(
+                    fontSize: 15,
+                  )
+              )
           ],
-        )
+        ),
+      ),
+      body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                  "Menu",
+                  style: TextStyle(fontSize: 80)
+              ),
+              ElevatedButton(
+                child: Text(
+                  "Throw Test",
+                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                ),
+                onPressed: () {
+                  throw Exception('Throw test'); },
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                child: Text(
+                  "Log out",
+                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                ),
+                onPressed: () async => logOut(),
+              ),
+              ElevatedButton(
+                child: Text(
+                  "Link Twitter",
+                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                ),
+                onPressed: () async => Account.instance.linkTwitter(),
+              ),
+              ElevatedButton(
+                child: Text(
+                  "Unlink Twitter",
+                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                ),
+                onPressed: () async => Account.instance.unlink(AuthType.twitter),
+              ),
+              ElevatedButton(
+                child: Text(
+                  "Delete Account",
+                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                ),
+                onPressed: () async => Account.instance.deleteAccount(),
+              )
+            ],
+          )
+      ),
     );
   }
 }
