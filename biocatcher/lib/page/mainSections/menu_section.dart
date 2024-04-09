@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../logic/account.dart';
+
 class MenuSection extends StatefulWidget {
   const MenuSection({super.key});
 
@@ -17,7 +19,7 @@ class MenuState extends State<MenuSection> {
             child: CircularProgressIndicator()
         ),
         barrierDismissible: false);
-    await FirebaseAuth.instance.signOut();
+    await Account.instance.signOut();
     if (context.mounted) {
       Navigator.pop(context);
       Navigator.pushNamed(context, "/");

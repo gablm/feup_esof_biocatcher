@@ -2,7 +2,7 @@ import 'package:bio_catcher/elements/decorated_text_field.dart';
 import 'package:bio_catcher/elements/oauth_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:bio_catcher/logic/account.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -15,34 +15,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginState extends State<LoginPage> {
-  Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
-
-  Future<void> signInWithTwitter() async {
-    TwitterAuthProvider twitterProvider = TwitterAuthProvider();
-    await FirebaseAuth.instance.signInWithProvider(twitterProvider);
-  }
-
-  Future<void> signInWithEmailAndPassword() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: widget.idController.text,
-        password: widget.passwordController.text
-    );
-  }
 
   void tryToSignIn(String type) async {
     showDialog(
@@ -51,23 +23,25 @@ class LoginState extends State<LoginPage> {
           child: CircularProgressIndicator()
         ),
         barrierDismissible: false);
+
     try {
       switch(type) {
         case 'Google':
-          await signInWithGoogle();
+          await Account.instance.signInWithGoogle();
           break;
         case 'X':
-          await signInWithTwitter();
+          await Account.instance.signInWithTwitter();
           break;
         default:
-          await signInWithEmailAndPassword();
+          await Account.instance.signInWithEmailAndPassword(
+              widget.idController.text, widget.passwordController.text
+          );
           break;
       }
 
-      if (FirebaseAuth.instance.currentUser == null) {
+      if (Account.instance.currentUser == null) {
         throw FirebaseAuthException(code: "invalid-user");
       }
-
       if (context.mounted) {
         Navigator.pop(context);
         Navigator.pushNamed(context, "/main");
@@ -86,7 +60,6 @@ class LoginState extends State<LoginPage> {
         _ => "Unknown error"
       };
       Navigator.pop(context);
-
 
       FocusManager.instance.primaryFocus?.unfocus();
       showDialog(context: context, builder: (context) => Center(
@@ -146,7 +119,7 @@ class LoginState extends State<LoginPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (FirebaseAuth.instance.currentUser != null) {
+      if (Account.instance.isSignedIn()) {
         Navigator.pushNamed(context, "/main");
       }
     });
