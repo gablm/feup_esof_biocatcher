@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 enum AuthType {
@@ -13,6 +14,7 @@ class Account {
   static final Account _instance = Account._privateConstructor();
   static Account get instance => _instance;
   late FirebaseAuth _firebaseAuth;
+  late FirebaseFirestore _firestore;
   User? get currentUser => _firebaseAuth.currentUser;
   String get userId => _firebaseAuth.currentUser?.uid ?? "";
   List<UserInfo> get loginMethods => currentUser?.providerData ?? [];
@@ -21,6 +23,7 @@ class Account {
   //#region Private Constructor
   Account._privateConstructor() {
     _firebaseAuth = FirebaseAuth.instance;
+    _firestore = FirebaseFirestore.instance;
   }
   //#endregion
 
@@ -29,6 +32,14 @@ class Account {
   Future<void> changePassword(String password) async =>
       currentUser?.updatePassword(password);
   Future<void> signOut() async => await _firebaseAuth.signOut();
+
+  Future<void> loadUser() async {
+    if (!isSignedIn()) return;
+
+    _firestore.collection("profiles").doc(userId).get().then(
+            (value) => print(value.data())
+    );
+  }
   //#endregion
 
   //#region Sign-in
@@ -48,6 +59,8 @@ class Account {
 
     // Once signed in, return the UserCredential
     await _firebaseAuth.signInWithCredential(credential);
+
+    loadUser();
   }
 
   Future<void> signInWithTwitter() async {

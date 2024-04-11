@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "182996583953",
+    "firebase_url": "https://biocatcher-db-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "biocatcher-db",
     "storage_bucket": "biocatcher-db.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "182996583953-konvuogc6jalsc6p7vc2mfoa3mobcimp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.biocatcher.app",
+            "certificate_hash": "6e1c65fcce28a2606abbbc96d5aa9b4849c0d181"
+          }
+        },
         {
           "client_id": "182996583953-scpc3at7o0ujq08heli36709bv35bhls.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +38,13 @@
             {
               "client_id": "182996583953-scpc3at7o0ujq08heli36709bv35bhls.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "182996583953-mieqt44iqgqt3dfi9krsi6ilirrb06nm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.biocatcher.app"
+              }
             }
           ]
         }

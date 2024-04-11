@@ -54,6 +54,7 @@ class DefaultFirebaseOptions {
     appId: '1:182996583953:android:b3091519ed8b167c81d3b0',
     messagingSenderId: '182996583953',
     projectId: 'biocatcher-db',
+    databaseURL: 'https://biocatcher-db-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'biocatcher-db.appspot.com',
   );
 
@@ -62,7 +63,9 @@ class DefaultFirebaseOptions {
     appId: '1:182996583953:ios:d106055bf470127d81d3b0',
     messagingSenderId: '182996583953',
     projectId: 'biocatcher-db',
+    databaseURL: 'https://biocatcher-db-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'biocatcher-db.appspot.com',
+    androidClientId: '182996583953-konvuogc6jalsc6p7vc2mfoa3mobcimp.apps.googleusercontent.com',
     iosClientId: '182996583953-mieqt44iqgqt3dfi9krsi6ilirrb06nm.apps.googleusercontent.com',
     iosBundleId: 'com.biocatcher.app',
   );
