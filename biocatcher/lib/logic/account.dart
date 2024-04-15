@@ -1,3 +1,4 @@
+import 'package:bio_catcher/logic/animal.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -26,6 +27,7 @@ class Account {
   Account._privateConstructor() {
     _firebaseAuth = FirebaseAuth.instance;
     _firestore = FirebaseFirestore.instance;
+    loadAnimals();
   }
   //#endregion
 
@@ -48,6 +50,16 @@ class Account {
           profile = logic.User(_firestore, value.data()!);
         }
     );
+  }
+
+  Future<void> loadAnimals() async {
+    await _firestore.collection("animals").get()
+        .then((value) {
+      if (value.docs.isEmpty) throw Exception("No animals found.");
+      for (var doc in value.docs) {
+        Animal.animalCollection[doc.id] = Animal(doc.data());
+      }
+    });
   }
   //#endregion
 

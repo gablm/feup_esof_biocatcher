@@ -1,3 +1,4 @@
+import 'package:bio_catcher/page/mainSections/animalview_section.dart';
 import 'package:bio_catcher/page/mainSections/map_section.dart';
 import 'package:bio_catcher/page/mainSections/menu_section.dart';
 import 'package:bio_catcher/page/mainSections/shop_section.dart';
@@ -16,13 +17,21 @@ class MainPage extends StatefulWidget {
 
 class MainState extends State<MainPage> {
   String page = "map";
+  String arg = "";
 
   @override
   void initState() {
     super.initState();
     Account.instance.profile?.updatedUserData
         .listen(
-            (event) => setState(() {})
+            (event) => setState(() {
+              if (event is String) {
+                if (event.contains("AnimalView")) {
+                  page = "animalview";
+                  arg = event.split(" ").last;
+                }
+              }
+            })
     );
   }
 
@@ -65,7 +74,10 @@ class MainState extends State<MainPage> {
                         color: Theme.of(context).colorScheme.inversePrimary
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (page == 'menu') return;
+                    setState(() => page = "menu");
+                  },
                 )
             )
           ]
@@ -129,7 +141,8 @@ class MainState extends State<MainPage> {
         'menu' => const MenuSection(),
         'storage' => const StorageSection(),
         'shop' => const ShopSection(),
-        _ => const ErrorSection(error: 'No information was provided about it'),
+        'animalview' => AnimalViewSection(animalId: arg),
+        _ => const ErrorSection(error: 'An invalid page was reached.'),
       },
     );
   }

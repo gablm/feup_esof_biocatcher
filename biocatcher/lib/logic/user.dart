@@ -10,12 +10,14 @@ class User {
     nickname = map["nickname"];
     handle = map["handle"];
     _coins = map["coins"];
-    _level = map["level"];
+    _level = map["level"].toDouble();
     ownedAnimals = map["animals"];
   }
 
   StreamController userDataUpd = StreamController.broadcast();
   Stream get updatedUserData => userDataUpd.stream;
+
+  void triggerUserDataEvent(String data) => userDataUpd.add(data);
 
   late String nickname;
   late String handle;

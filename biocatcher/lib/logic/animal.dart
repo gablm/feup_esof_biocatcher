@@ -13,14 +13,14 @@ enum ConservationStatus {
 
 class AnimalStats {
   AnimalStats(Map<String, dynamic> map) {
-    baseAtk = map["baseAtk"];
-    baseCritDmg = map["baseCritDmg"];
-    baseHp = map["baseHp"];
-    baseCritRate = map["baseCritRate"];
-    scalingHp = map["scalingHp"];
-    scalingAtk = map["scalingAtk"];
-    scalingCritDmg = map["scalingCritDmg"];
-    scalingCritRate = map["scalingCritRate"];
+    baseAtk = map["baseAtk"].toDouble();
+    baseCritDmg = map["baseCritDmg"].toDouble();
+    baseHp = map["baseHp"].toDouble();
+    baseCritRate = map["baseCritRate"].toDouble();
+    scalingHp = map["scalingHp"].toDouble();
+    scalingAtk = map["scalingAtk"].toDouble();
+    scalingCritDmg = map["scalingCritDmg"].toDouble();
+    scalingCritRate = map["scalingCritRate"].toDouble();
   }
 
   double baseHp = 0;
@@ -42,16 +42,20 @@ class Animal {
   Animal(Map<String, dynamic> map) {
     name = map["name"];
     scientificName = map["scientificName"];
+    pictureUri = map["pictureUri"];
     conservationStatus = ConservationStatus.values[map["conservationStatus"]];
-    avgWeight = map["avgWeight"];
-    avgLongevity = map["avgLongevity"];
+    avgWeight = map["avgWeight"].toDouble();
+    avgLongevity = map["avgLongevity"].toDouble();
     origin = map["origin"];
     description = map["description"];
     stats = AnimalStats(map["stats"]);
   }
 
+  static Map<String, Animal> animalCollection = {};
+
   late String name;
   late String scientificName;
+  late String pictureUri;
   late ConservationStatus conservationStatus;
   late double avgWeight;
   late double avgLongevity;

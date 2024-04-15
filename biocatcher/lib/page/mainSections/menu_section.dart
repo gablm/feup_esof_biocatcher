@@ -32,6 +32,7 @@ class MenuState extends State<MenuSection> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
+        backgroundColor: Colors.transparent,
         title: Column(
           children: [
             Text(
