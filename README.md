@@ -137,12 +137,15 @@ You can find below information and references related with the project managemen
   </tr>
   <tr>
    <th>
-    Sprint 1 (v0.1.0)
+    Sprint 1 (v0.0.2)
+    <br>
+    <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/releases/tag/v0.0.2">Release</a>
    </th>
    <td>
     <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/dca4f5ea-cd36-494f-bfd0-3fbdb54af8f1">
    </td>
-   <td>Nothing yet.</td>
+   <td><img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/4460539c-954e-4339-9863-c02c4618ffb2">
+   </td>
    <td>
     <ul>
      <li>Yet to be.</li>
