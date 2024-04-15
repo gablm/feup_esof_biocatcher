@@ -113,6 +113,10 @@ class LoginState extends State<LoginPage> {
           ),
         ),
       ));
+    } catch (e) {
+      await Account.instance.signOut();
+      if (!context.mounted) return;
+      Navigator.pop(context);
     }
   }
 
@@ -252,7 +256,7 @@ class LoginState extends State<LoginPage> {
                 )
             ),
         ),
-        bottomSheet: TextButton(
+        /*bottomSheet: TextButton(
             style: TextButton.styleFrom(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(32.0),
@@ -269,7 +273,7 @@ class LoginState extends State<LoginPage> {
                   fontSize: 20,
                 )
             )
-        ),
+        )*/
     );
   }
 }

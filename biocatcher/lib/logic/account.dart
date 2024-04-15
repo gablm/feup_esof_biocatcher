@@ -109,16 +109,16 @@ class Account {
       idToken: googleAuth?.idToken,
     );
 
-    currentUser?.linkWithCredential(credential);
+    await currentUser?.linkWithCredential(credential);
   }
 
   Future<void> linkTwitter() async {
     TwitterAuthProvider twitterProvider = TwitterAuthProvider();
-    currentUser?.linkWithProvider(twitterProvider);
+    await currentUser?.linkWithProvider(twitterProvider);
   }
 
   Future<void> linkPhone(String phoneNumber) async {
-    currentUser?.linkWithPhoneNumber(phoneNumber);
+    await currentUser?.linkWithPhoneNumber(phoneNumber);
   }
   //#endregion
 
@@ -128,15 +128,15 @@ class Account {
     profile = null;
   }
 
-  void unlink(AuthType type)
+  Future<void> unlink(AuthType type) async
   {
     switch (type)
     {
       case AuthType.twitter:
-        currentUser?.unlink("twitter.com");
+        await currentUser?.unlink("twitter.com");
         break;
       case AuthType.google:
-        currentUser?.unlink("google.com");
+        await currentUser?.unlink("google.com");
         break;
       default:
         throw Exception("Invalid unlink type");

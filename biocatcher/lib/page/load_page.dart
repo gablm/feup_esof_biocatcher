@@ -17,7 +17,14 @@ class LoadState extends State<LoadPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 1));
       if (Account.instance.isSignedIn()) {
-        await Account.instance.loadUser();
+        try {
+          await Account.instance.loadUser();
+        } catch (e) {
+          await Account.instance.signOut();
+          if (!context.mounted) return;
+          Navigator.pushNamed(context, "/login");
+        }
+
         if (!context.mounted) return;
         Navigator.pushNamed(context, "/main");
       }

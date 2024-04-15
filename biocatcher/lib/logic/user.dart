@@ -12,11 +12,13 @@ class User {
     handle = map["handle"];
     _coins = map["coins"];
     _level = map["level"].toDouble();
+    picture = map["picture"];
     ownedAnimals = map["animals"];
   }
 
   late String nickname;
   late String handle;
+  late String picture;
   int _coins = 0;
   double _level = 0;
   late FirebaseFirestore _firestore;

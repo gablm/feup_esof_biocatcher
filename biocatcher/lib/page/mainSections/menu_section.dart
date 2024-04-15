@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../logic/account.dart';
@@ -30,6 +31,11 @@ class MenuState extends State<MenuSection> {
   @override
   Widget build(BuildContext context) {
     EventHandler.mainPageAppBar.add(false);
+    bool twitterLinked = Account.instance.loginMethods
+        .any((element) => element.providerId == "twitter.com");
+    bool googleLinked = Account.instance.loginMethods
+        .any((element) => element.providerId == "google.com");
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -53,23 +59,248 @@ class MenuState extends State<MenuSection> {
           ],
         ),
       ),
-      body: Center(
+      body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                  "Menu",
-                  style: TextStyle(fontSize: 80)
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: Image.network(
+                    Account.instance.profile!.picture,
+                    fit: BoxFit.cover,
+                    width: 64,
+                    height: 64,
+                  )
               ),
-              ElevatedButton(
-                child: Text(
-                  "Throw Test",
-                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-                ),
-                onPressed: () {
-                  throw Exception('Throw test'); },
+              Text(
+                  "${Account.instance.profile?.nickname}",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25
+                  )
               ),
-              const SizedBox(height: 10),
+              Text(
+                  "@${Account.instance.profile?.handle}",
+                  style: const TextStyle(fontSize: 20)
+              ),
+              Divider(
+                  height: 30,
+                  color: Theme.of(context).colorScheme.inversePrimary
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.email_outlined,
+                          size: 24
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: Text(
+                            "${Account.instance.currentUser?.email}",
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ]
+                  ),
+                  ElevatedButton(
+                      onPressed: null,
+                      child: Text(
+                        "Change",
+                        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                      ),
+                    )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                            Icons.key_outlined,
+                            size: 24
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: Text(
+                            "•••••••••••••",
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ]
+                  ),
+                  ElevatedButton(
+                    onPressed: null,
+                    child: Text(
+                      "Change",
+                      style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                            Icons.phone_android_outlined,
+                            size: 24
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: Text(
+                            Account.instance.currentUser?.phoneNumber ?? "Unlinked",
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ]
+                  ),
+                  if (true)
+                    ElevatedButton(
+                      child: Text(
+                        "Link",
+                        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                      ),
+                      onPressed: null,
+                    ),
+                  if (false)
+                    ElevatedButton(
+                      child: Text(
+                        "Unlink",
+                        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                      ),
+                      onPressed: null
+                    )
+                ],
+              ),
+              Divider(
+                  height: 30,
+                  color: Theme.of(context).colorScheme.inversePrimary
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Image(
+                        image: AssetImage("assets/google_logo.png"),
+                        height: 18.0,
+                        width: 24,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Text(
+                          "Google",
+                          style: TextStyle(
+                            fontSize: 17,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ]
+                  ),
+                  if (!googleLinked)
+                    ElevatedButton(
+                    child: Text(
+                      "Link",
+                      style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                    ),
+                    onPressed: () async {
+                      await Account.instance.linkGoogle();
+                      setState(() {});
+                    },
+                  ),
+                  if (googleLinked)
+                    ElevatedButton(
+                    child: Text(
+                      "Unlink",
+                      style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                    ),
+                    onPressed: () async {
+                      await Account.instance.unlink(AuthType.google);
+                      setState(() {});
+                    },
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Image(
+                          image: AssetImage("assets/x_logo_black.png"),
+                          height: 18.0,
+                          width: 24,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: Text(
+                            "X (formerly Twitter)",
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ]
+                  ),
+                  if (!twitterLinked)
+                    ElevatedButton(
+                      child: Text(
+                        "Link",
+                        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                      ),
+                      onPressed: () async {
+                        await Account.instance.linkTwitter();
+                        setState(() {});
+                      },
+                    ),
+                  if (twitterLinked)
+                    ElevatedButton(
+                      child: Text(
+                        "Unlink",
+                        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                      ),
+                      onPressed: () async {
+                        await Account.instance.unlink(AuthType.twitter);
+                        setState(() {});},
+                    )
+                ],
+              ),
+              Divider(
+                  height: 30,
+                  color: Theme.of(context).colorScheme.inversePrimary
+              ),
               ElevatedButton(
                 child: Text(
                   "Log out",
@@ -78,25 +309,20 @@ class MenuState extends State<MenuSection> {
                 onPressed: () async => logOut(),
               ),
               ElevatedButton(
-                child: Text(
-                  "Link Twitter",
-                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red
                 ),
-                onPressed: () async => Account.instance.linkTwitter(),
-              ),
-              ElevatedButton(
-                child: Text(
-                  "Unlink Twitter",
-                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-                ),
-                onPressed: () async => Account.instance.unlink(AuthType.twitter),
-              ),
-              ElevatedButton(
-                child: Text(
+                child: const Text(
                   "Delete Account",
-                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                  style: TextStyle(
+                      color: Colors.white
+                  ),
                 ),
                 onPressed: () async => Account.instance.deleteAccount(),
+              ),
+              /*Divider(
+                  height: 30,
+                  color: Theme.of(context).colorScheme.inversePrimary
               ),
               ElevatedButton(
                 child: Text(
@@ -106,7 +332,7 @@ class MenuState extends State<MenuSection> {
                 onPressed: () {
                   Account.instance.profile?.addCoins(10);
                 },
-              )
+              )*/
             ],
           )
       ),
