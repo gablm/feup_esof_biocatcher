@@ -94,6 +94,15 @@ class MenuState extends State<MenuSection> {
                   style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
                 ),
                 onPressed: () async => Account.instance.deleteAccount(),
+              ),
+              ElevatedButton(
+                child: Text(
+                  "Add 10 coins",
+                  style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                ),
+                onPressed: () {
+                  Account.instance.profile?.addCoins(10);
+                },
               )
             ],
           )

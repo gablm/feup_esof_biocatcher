@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:bio_catcher/logic/user.dart' as logic;
 
 enum AuthType {
   password,
@@ -18,6 +19,7 @@ class Account {
   User? get currentUser => _firebaseAuth.currentUser;
   String get userId => _firebaseAuth.currentUser?.uid ?? "";
   List<UserInfo> get loginMethods => currentUser?.providerData ?? [];
+  logic.User? profile;
   //#endregion
 
   //#region Private Constructor
@@ -31,13 +33,20 @@ class Account {
   bool isSignedIn() => _firebaseAuth.currentUser != null;
   Future<void> changePassword(String password) async =>
       currentUser?.updatePassword(password);
-  Future<void> signOut() async => await _firebaseAuth.signOut();
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+    profile = null;
+  }
 
   Future<void> loadUser() async {
     if (!isSignedIn()) return;
 
-    _firestore.collection("profiles").doc(userId).get().then(
-            (value) => print(value.data())
+    await _firestore.collection("profiles")
+        .doc(userId).get()
+        .then((value) {
+          if (value.data() == null) throw Exception("Invalid user id");
+          profile = logic.User(_firestore, value.data()!);
+        }
     );
   }
   //#endregion
@@ -59,19 +68,20 @@ class Account {
 
     // Once signed in, return the UserCredential
     await _firebaseAuth.signInWithCredential(credential);
-
-    loadUser();
+    await loadUser();
   }
 
   Future<void> signInWithTwitter() async {
     TwitterAuthProvider twitterProvider = TwitterAuthProvider();
     await _firebaseAuth.signInWithProvider(twitterProvider);
+    await loadUser();
   }
 
-  Future<void> signInWithEmailAndPassword(
-          String email, String password) async =>
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
+    await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+    await loadUser();
+  }
+
   //#endregion
 
   //#region Linking accounts
@@ -103,6 +113,7 @@ class Account {
   void deleteAccount()
   {
     currentUser?.delete();
+    profile = null;
   }
 
   void unlink(AuthType type)

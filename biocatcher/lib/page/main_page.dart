@@ -4,6 +4,7 @@ import 'package:bio_catcher/page/mainSections/shop_section.dart';
 import 'package:bio_catcher/page/mainSections/storage_section.dart';
 import 'package:flutter/material.dart';
 
+import '../logic/account.dart';
 import 'mainSections/error_section.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,8 +18,60 @@ class MainState extends State<MainPage> {
   String page = "map";
 
   @override
+  void initState() {
+    super.initState();
+    Account.instance.profile?.updatedUserData
+        .listen(
+            (event) => setState(() {})
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Directionality(
+                textDirection: TextDirection.ltr,
+                child: ElevatedButton.icon(
+                  icon: const Icon(
+                    Icons.currency_bitcoin,
+                    color: Colors.yellow
+                  ),
+                  label: Text(
+                    Account.instance.profile?.getCoins().toString() ?? "0",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.inversePrimary
+                    ),
+                  ),
+                  onPressed: () {},
+                )
+            ),
+            Directionality(
+                textDirection: TextDirection.rtl,
+                child: ElevatedButton.icon(
+                  icon: const Icon(
+                    Icons.account_circle,
+                    color: Colors.lightBlueAccent,
+                  ),
+                  label: Text(
+                    "Lvl. ${Account.instance.profile?.getLevel().round()}",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary
+                    ),
+                  ),
+                  onPressed: () {},
+                )
+            )
+          ]
+        ),
+      ),
+      extendBodyBehindAppBar: true,
       bottomNavigationBar: Container(
         height: 60,
         decoration: BoxDecoration(
