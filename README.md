@@ -34,7 +34,7 @@ Made by:
 
 ### Product Vision
 
-Learning about animals made fun, we bring nature to your fingertips.
+Discover, collect, and battle Portugal's native fauna in an exciting Pokémon-inspired app! Explore the diverse wildlife of Portugal while learning about its ecosystems. Challenge your friends to epic battles using the animals you've collected. Dive into fun and education with our app!
 
 ### Features and Assumptions
 
