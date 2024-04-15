@@ -68,9 +68,14 @@ class MainState extends State<MainPage> {
             Directionality(
                 textDirection: TextDirection.rtl,
                 child: ElevatedButton.icon(
-                  icon: const Icon(
-                    Icons.account_circle,
-                    color: Colors.lightBlueAccent,
+                  icon: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Image.network(
+                        Account.instance.profile!.picture,
+                        fit: BoxFit.cover,
+                        width: 24,
+                        height: 24,
+                      )
                   ),
                   label: Text(
                     "Lvl. ${Account.instance.profile?.getLevel().round()}",
