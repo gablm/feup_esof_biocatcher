@@ -28,6 +28,8 @@ class StorageState extends State<StorageSection> {
         crossAxisCount: 2,
         mainAxisSpacing: 10.0,
         crossAxisSpacing: 10.0,
+        childAspectRatio: 0.60,
+        shrinkWrap: true,
         children: [
           for (var animal in Account.instance.profile!.ownedAnimals.entries)
             AnimalCard(animalId: animal.key, level: animal.value)
