@@ -1,6 +1,7 @@
+
+import 'package:bio_catcher/elements/text_with_highlight.dart';
 import 'package:flutter/material.dart';
 
-import '../../logic/account.dart';
 import '../../logic/animal.dart';
 import '../../logic/eventHandler.dart';
 
@@ -17,12 +18,11 @@ class AnimalViewSection extends StatefulWidget {
 }
 
 class AnimalViewState extends State<AnimalViewSection> {
-
   TextSpan conservationStatusText(ConservationStatus status) {
     Color finalColor = Colors.grey;
     String finalText = "Unknown type";
 
-    switch(status) {
+    switch (status) {
       case ConservationStatus.extinct:
         finalText = "Extinct";
         finalColor = Colors.black;
@@ -65,10 +65,10 @@ class AnimalViewState extends State<AnimalViewSection> {
     return TextSpan(
         text: finalText,
         style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: finalColor,
-        )
-    );
+            fontWeight: FontWeight.bold,
+            color: finalColor,
+            fontSize: 16,
+            shadows: const [Shadow(blurRadius: 10)]));
   }
 
   @override
@@ -76,135 +76,76 @@ class AnimalViewState extends State<AnimalViewSection> {
     EventHandler.mainPageAppBar.add(false);
     if (widget.animal == null) {
       return const Center(
-        child: Text('Invalid animal', style: TextStyle(fontSize: 20))
-      );
+          child: Text('Invalid animal', style: TextStyle(fontSize: 20)));
     }
-    return Center(
-      child: Column(
-        children: [
-          SizedBox(
-              height: 340,
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: GridTile(
-                      footer: Container(
-                        padding: const EdgeInsets.fromLTRB(32,8,8,8),
-                        child: Text(
-                          widget.animal!.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 24,
-                          ),
-                        ),
-                      ),
-                      child: Image.network(
-                        widget.animal!.pictureUri,
-                        fit: BoxFit.cover,
-                      )
-                  ),
-              )
-          ),
-          const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.all(13),
-            decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-                borderRadius: BorderRadius.circular(10)
-            ),
-            child: RichText(
-                text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: "Conservation Status: ",
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                          )
-                      ),
-                      conservationStatusText(widget.animal!.conservationStatus)
-                    ]
-                )
-            ),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(13),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.circular(10)
-                ),
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: "Average Weight: ",
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                          )
-                      ),
-                      TextSpan(
-                          text: "~${widget.animal!.avgWeight.round()}kg",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                          )
-                      )
-                    ]
-                  )
-                ),
-              ),
-              const SizedBox(width: 13),
-              Container(
-                padding: const EdgeInsets.all(13),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(10)
-                ),
-                child: RichText(
-                    text: TextSpan(
+    return Column(
+      children: [
+        Container(
+            height: 340,
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: GridTile(
+                  footer: Container(
+                      padding: const EdgeInsets.fromLTRB(32, 8, 32, 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextSpan(
-                              text: "Average Longevity: ",
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.inversePrimary,
-                              )
+                          Text(
+                            widget.animal!.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
                           ),
-                          TextSpan(
-                              text: "~${widget.animal!.avgLongevity.round()}y",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.inversePrimary,
-                              )
-                          )
-                        ]
-                    )
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.circular(10)
+                          RichText(
+                              text: conservationStatusText(
+                                  widget.animal!.conservationStatus))
+                        ],
+                      )),
+                  child: Image.network(
+                    widget.animal!.pictureUri,
+                    fit: BoxFit.cover,
+                  )),
+            )),
+        Wrap(
+          children: [
+            TextWithHighlight(
+                "Scientific Name",
+                widget.animal!.scientificName
             ),
-            child: RichText(
-              textAlign: TextAlign.justify,
-              text: TextSpan(
+            TextWithHighlight(
+                "Origin",
+                widget.animal!.origin
+            ),
+            TextWithHighlight(
+                "Average Longevity",
+                "~${widget.animal!.avgLongevity.round()}y"
+            ),
+            TextWithHighlight(
+                "Average Weight",
+                "~${widget.animal!.avgWeight.round()}kg"
+            ),
+          ],
+        ),
+        const SizedBox(height: 5),
+        Container(
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(10)),
+          child: RichText(
+            textAlign: TextAlign.justify,
+            text: TextSpan(
                 text: widget.animal!.description,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                  height: 1.3
-                )
-              ),
-            ),
-          )
-        ],
-      ),
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                    height: 1.3)),
+          ),
+        )
+      ],
     );
   }
 }
