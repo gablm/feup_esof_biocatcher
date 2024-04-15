@@ -28,6 +28,7 @@ class MenuState extends State<MenuSection> {
 
   @override
   Widget build(BuildContext context) {
+    Account.instance.profile?.triggerUserDataEvent("disableAppBar");
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

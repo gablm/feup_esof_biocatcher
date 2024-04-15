@@ -14,6 +14,7 @@ class StorageSection extends StatefulWidget {
 class StorageState extends State<StorageSection> {
   @override
   Widget build(BuildContext context) {
+    Account.instance.profile?.triggerUserDataEvent("enableAppBar");
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

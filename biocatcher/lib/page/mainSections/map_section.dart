@@ -3,6 +3,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../logic/account.dart';
+
 class MapSection extends StatefulWidget {
   const MapSection({super.key});
 
@@ -37,6 +39,7 @@ class MapState extends State<MapSection> {
 
   @override
   Widget build(BuildContext context) {
+    Account.instance.profile?.triggerUserDataEvent("enableAppBar");
     return GoogleMap(
         onMapCreated: (GoogleMapController controller)
         {

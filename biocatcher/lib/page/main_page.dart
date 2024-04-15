@@ -18,6 +18,7 @@ class MainPage extends StatefulWidget {
 class MainState extends State<MainPage> {
   String page = "map";
   String arg = "";
+  bool showAppBar = true;
 
   @override
   void initState() {
@@ -30,6 +31,12 @@ class MainState extends State<MainPage> {
                   page = "animalview";
                   arg = event.split(" ").last;
                 }
+                if (event == "disableAppBar") {
+                  showAppBar = false;
+                }
+                if (event == "enableAppBar") {
+                  showAppBar = true;
+                }
               }
             })
     );
@@ -38,7 +45,7 @@ class MainState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: !showAppBar ? null : AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
