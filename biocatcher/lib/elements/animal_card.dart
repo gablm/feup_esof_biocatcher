@@ -5,7 +5,12 @@ import 'package:bio_catcher/logic/eventHandler.dart';
 import 'package:flutter/material.dart';
 
 class AnimalCard extends StatelessWidget {
-  AnimalCard({super.key, required this.animalId, required level}) {
+  AnimalCard({
+    super.key,
+    required this.animalId,
+    required level,
+    required void Function() this.onUpdate
+  }) {
     animal = Animal.animalCollection[animalId];
     _level = level.toDouble();
   }
@@ -13,8 +18,82 @@ class AnimalCard extends StatelessWidget {
   final String animalId;
   late double _level;
   late Animal? animal;
+  late Function() onUpdate;
   int currentCards = 10;
   int requiredCards = 100;
+
+  Future<void> deleteAnimal(BuildContext context) async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.red
+            ),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.warning,
+                    color: Colors.white,
+                    size: 50,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "This is an irreversible action!",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.bold,
+                        backgroundColor: Colors.red,
+                        fontSize: 15
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    "Are you sure?",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        decoration: TextDecoration.none,
+                        backgroundColor: Colors.red,
+                        fontSize: 13
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        child: Text(
+                          "Cancel",
+                          style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                        ),
+                        onPressed: () async => Navigator.pop(context),
+                      ),
+                      ElevatedButton(
+                        child: Text(
+                          "Confirm",
+                          style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+                        ),
+                        onPressed: () async {
+                          Navigator.pop(context);
+                          await Account.instance.profile?.removeAnimal(animalId);
+                          onUpdate();
+                        },
+                      )
+                    ],
+                  )
+                ]
+            ),
+          ),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +105,6 @@ class AnimalCard extends StatelessWidget {
       );
     }
     return Card(
-      //onPressed: () {  },
         child: Center(
           child: Column(
             children: [
@@ -100,7 +178,7 @@ class AnimalCard extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: null,
+                    onPressed: () => deleteAnimal(context),
                     icon: const Icon(
                       Icons.close,
                       size: 30,

@@ -32,7 +32,11 @@ class StorageState extends State<StorageSection> {
         shrinkWrap: true,
         children: [
           for (var animal in Account.instance.profile!.ownedAnimals.entries)
-            AnimalCard(animalId: animal.key, level: animal.value)
+            AnimalCard(
+                animalId: animal.key,
+                level: animal.value,
+                onUpdate: () => setState(() {}),
+            )
         ],
       ),
     );

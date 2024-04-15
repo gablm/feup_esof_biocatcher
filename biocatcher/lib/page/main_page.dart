@@ -105,7 +105,10 @@ class MainState extends State<MainPage> {
               disabledColor: Colors.green,
               enableFeedback: false,
               onPressed: page == "storage" || page == "animal_view" ? null
-                  : () => { setState(() => page = "storage") },
+                  : () async {
+                await Account.instance.profile?.reloadAccountData();
+                setState(() => page = "storage");
+              },
               icon: const Icon(
                 Icons.catching_pokemon_sharp,
                 size: 35,

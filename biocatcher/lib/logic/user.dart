@@ -60,4 +60,28 @@ class User {
     // check if repeat
     // same as nickname but field handle
   }
+
+  Future<void> reloadAccountData() async {
+    var res = _firestore.collection("profiles")
+        .doc(Account.instance.userId);
+    var map = (await res.get()).data();
+    if (map == null) return;
+
+    nickname = map["nickname"];
+    handle = map["handle"];
+    _coins = map["coins"];
+    _level = map["level"].toDouble();
+    picture = map["picture"];
+    ownedAnimals = map["animals"];
+  }
+  
+  Future<void> removeAnimal(String id) async {
+    var res = _firestore.collection("profiles")
+        .doc(Account.instance.userId);
+    var resData = (await res.get()).data();
+    if (resData == null) return;
+    resData["animals"].remove(id);
+    res.update(resData);
+    ownedAnimals = resData["animals"];
+  }
 }
