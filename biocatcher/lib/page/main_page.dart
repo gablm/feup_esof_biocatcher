@@ -99,7 +99,7 @@ class MainState extends State<MainPage> {
             IconButton(
               disabledColor: Colors.green,
               enableFeedback: false,
-              onPressed: page == "storage" ? null
+              onPressed: page == "storage" || page == "animal_view" ? null
                   : () => { setState(() => page = "storage") },
               icon: const Icon(
                 Icons.catching_pokemon_sharp,
