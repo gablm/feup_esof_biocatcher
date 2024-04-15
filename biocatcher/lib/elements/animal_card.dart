@@ -1,6 +1,7 @@
 
 import 'package:bio_catcher/logic/account.dart';
 import 'package:bio_catcher/logic/animal.dart';
+import 'package:bio_catcher/logic/eventHandler.dart';
 import 'package:flutter/material.dart';
 
 class AnimalCard extends StatelessWidget {
@@ -23,7 +24,7 @@ class AnimalCard extends StatelessWidget {
       );
     }
     return GestureDetector(
-      onTap: () => Account.instance.profile?.triggerUserDataEvent("AnimalView $animalId"),
+      onTap: () => EventHandler.changeSection.add("animal_view $animalId"),
       child: Card(
         //onPressed: () {  },
           child: Center(

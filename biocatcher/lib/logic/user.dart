@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bio_catcher/logic/eventHandler.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'account.dart';
@@ -14,11 +15,6 @@ class User {
     ownedAnimals = map["animals"];
   }
 
-  StreamController userDataUpd = StreamController.broadcast();
-  Stream get updatedUserData => userDataUpd.stream;
-
-  void triggerUserDataEvent(String data) => userDataUpd.add(data);
-
   late String nickname;
   late String handle;
   int _coins = 0;
@@ -30,13 +26,13 @@ class User {
 
   void addCoins(int coins) {
     _coins = _coins + coins < 0 ? 0 : _coins + coins;
-    userDataUpd.add("added coins");
+    EventHandler.updateUserData.add("added coins");
     _setUserField("coins", _coins);
   }
 
   void addLevel(double xp) {
     _level = xp < 0 ? _level : _level + xp;
-    userDataUpd.add("added xp");
+    EventHandler.updateUserData.add("added xp");
     _setUserField("level", _level);
   }
 

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../logic/account.dart';
+import '../../logic/eventHandler.dart';
 
 class MenuSection extends StatefulWidget {
   const MenuSection({super.key});
@@ -28,7 +29,7 @@ class MenuState extends State<MenuSection> {
 
   @override
   Widget build(BuildContext context) {
-    Account.instance.profile?.triggerUserDataEvent("disableAppBar");
+    EventHandler.mainPageAppBar.add(false);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

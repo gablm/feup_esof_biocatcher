@@ -6,6 +6,7 @@ import 'package:bio_catcher/page/mainSections/storage_section.dart';
 import 'package:flutter/material.dart';
 
 import '../logic/account.dart';
+import '../logic/eventHandler.dart';
 import 'mainSections/error_section.dart';
 
 class MainPage extends StatefulWidget {
@@ -23,23 +24,19 @@ class MainState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    Account.instance.profile?.updatedUserData
-        .listen(
-            (event) => setState(() {
-              if (event is String) {
-                if (event.contains("AnimalView")) {
-                  page = "animalview";
-                  arg = event.split(" ").last;
-                }
-                if (event == "disableAppBar") {
-                  showAppBar = false;
-                }
-                if (event == "enableAppBar") {
-                  showAppBar = true;
-                }
-              }
-            })
+    EventHandler.mainPageAppBarStream.listen(
+            (event) => setState(() { if (event is bool) showAppBar = event; })
     );
+    EventHandler.changeSectionStream.listen((event) {
+      if (event is String) {
+        setState(() {
+          var args = event.split(" ");
+          page = args.first;
+          arg = args.last;
+        });
+      }
+    });
+    EventHandler.userDataStream.listen((event) { setState(() { });});
   }
 
   @override
@@ -148,7 +145,7 @@ class MainState extends State<MainPage> {
         'menu' => const MenuSection(),
         'storage' => const StorageSection(),
         'shop' => const ShopSection(),
-        'animalview' => AnimalViewSection(animalId: arg),
+        'animal_view' => AnimalViewSection(animalId: arg),
         _ => const ErrorSection(error: 'An invalid page was reached.'),
       },
     );

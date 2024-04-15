@@ -2,6 +2,7 @@ import 'package:bio_catcher/main.dart';
 import 'package:flutter/material.dart';
 
 import '../../logic/account.dart';
+import '../../logic/eventHandler.dart';
 
 class ErrorSection extends StatefulWidget {
   const ErrorSection({super.key, required this.error});
@@ -14,7 +15,7 @@ class ErrorSection extends StatefulWidget {
 class ErrorState extends State<ErrorSection> {
   @override
   Widget build(BuildContext context) {
-    Account.instance.profile?.triggerUserDataEvent("disableAppBar");
+    EventHandler.mainPageAppBar.add(false);
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
         body: Center(

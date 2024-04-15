@@ -1,5 +1,6 @@
 
 import 'package:bio_catcher/elements/animal_card.dart';
+import 'package:bio_catcher/logic/eventHandler.dart';
 import 'package:flutter/material.dart';
 
 import '../../logic/account.dart';
@@ -14,7 +15,7 @@ class StorageSection extends StatefulWidget {
 class StorageState extends State<StorageSection> {
   @override
   Widget build(BuildContext context) {
-    Account.instance.profile?.triggerUserDataEvent("enableAppBar");
+    EventHandler.mainPageAppBar.add(true);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

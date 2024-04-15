@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../logic/account.dart';
 import '../../logic/animal.dart';
+import '../../logic/eventHandler.dart';
 
 class AnimalViewSection extends StatefulWidget {
   AnimalViewSection({super.key, required this.animalId}) {
@@ -72,7 +73,7 @@ class AnimalViewState extends State<AnimalViewSection> {
 
   @override
   Widget build(BuildContext context) {
-    Account.instance.profile?.triggerUserDataEvent("disableAppBar");
+    EventHandler.mainPageAppBar.add(false);
     if (widget.animal == null) {
       return const Center(
         child: Text('Invalid animal', style: TextStyle(fontSize: 20))
