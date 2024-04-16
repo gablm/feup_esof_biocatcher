@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../logic/account.dart';
@@ -26,6 +25,64 @@ class MenuState extends State<MenuSection> {
       Navigator.pop(context);
       Navigator.pushNamed(context, "/");
     }
+  }
+  
+  Future<void> changeLink(bool isLinked, AuthType type) async {
+    if (isLinked) {
+      if (Account.instance.loginMethods.length > 1) {
+        await Account.instance.unlink(type);
+        setState(() {});
+        return;
+      }
+      FocusManager.instance.primaryFocus?.unfocus();
+      showDialog(
+          context: context,
+          builder: (context) => Center(
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.red
+              ),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.warning,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      "You need at least one login method associated to the account.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.red,
+                          fontSize: 15
+                      ),
+                    )
+                  ]
+              ),
+            ),
+          ));
+      return;
+    }
+    switch (type) {
+      case AuthType.twitter:
+        await Account.instance.linkTwitter();
+        break;
+      case AuthType.google:
+        await Account.instance.linkGoogle();
+        break;
+      default:
+        break;
+    }
+    setState(() {});
   }
 
   @override
@@ -178,22 +235,13 @@ class MenuState extends State<MenuSection> {
                         ),
                       ]
                   ),
-                  if (true)
-                    ElevatedButton(
-                      child: Text(
-                        "Link",
-                        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-                      ),
-                      onPressed: null,
+                  ElevatedButton(
+                    child: Text(
+                      false ? "Unlink" : "Link",
+                      style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
                     ),
-                  if (false)
-                    ElevatedButton(
-                      child: Text(
-                        "Unlink",
-                        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-                      ),
-                      onPressed: null
-                    )
+                    onPressed: null,
+                  ),
                 ],
               ),
               Divider(
@@ -225,27 +273,12 @@ class MenuState extends State<MenuSection> {
                       ),
                     ]
                   ),
-                  if (!googleLinked)
-                    ElevatedButton(
+                  ElevatedButton(
                     child: Text(
-                      "Link",
+                      googleLinked ? "Unlink" : "Link",
                       style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
                     ),
-                    onPressed: () async {
-                      await Account.instance.linkGoogle();
-                      setState(() {});
-                    },
-                  ),
-                  if (googleLinked)
-                    ElevatedButton(
-                    child: Text(
-                      "Unlink",
-                      style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-                    ),
-                    onPressed: () async {
-                      await Account.instance.unlink(AuthType.google);
-                      setState(() {});
-                    },
+                    onPressed: () async => changeLink(googleLinked, AuthType.google),
                   )
                 ],
               ),
@@ -274,27 +307,13 @@ class MenuState extends State<MenuSection> {
                         ),
                       ]
                   ),
-                  if (!twitterLinked)
-                    ElevatedButton(
-                      child: Text(
-                        "Link",
-                        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-                      ),
-                      onPressed: () async {
-                        await Account.instance.linkTwitter();
-                        setState(() {});
-                      },
+                  ElevatedButton(
+                    child: Text(
+                      twitterLinked ? "Unlink" : "Link",
+                      style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
                     ),
-                  if (twitterLinked)
-                    ElevatedButton(
-                      child: Text(
-                        "Unlink",
-                        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-                      ),
-                      onPressed: () async {
-                        await Account.instance.unlink(AuthType.twitter);
-                        setState(() {});},
-                    )
+                    onPressed: () async => changeLink(twitterLinked, AuthType.twitter),
+                  ),
                 ],
               ),
               Divider(
