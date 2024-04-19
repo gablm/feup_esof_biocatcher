@@ -148,12 +148,11 @@ You can find below information and references related with the project managemen
    </td>
    <td>
     <ul>
-     <li>The focus for the next sprint will be to effectively divide the workload and put more hours towards the project.</li>
-     <li>The goals for the next sprint are finishing up the account system, implementing lootboxes, finishing the storage system and fixing any existing issues with the current code.</li>
      <li>
-      For the next sprint, we should divide the stories into smaller tasks in order to be able to distribute and finish them in a more organized and faster way.
+      The focus for the next sprint will be to effectively divide the workload and put more hours towards the project.
       Additionally, we have to better divide workload and do it in a more timely manner.
      </li>
+     <li>The goals for the next sprint are finishing up the account system, implementing lootboxes, finishing the storage system and fixing any existing issues with the current code.</li>
     </ul>
    </td>
   </tr>
