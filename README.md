@@ -155,4 +155,8 @@ You can find below information and references related with the project managemen
   </tr>
  </tbody>
 </table>
+
+### Happiness meter
+#### Sprint 1
+3 3 3 2 
  
