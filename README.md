@@ -148,7 +148,8 @@ You can find below information and references related with the project managemen
    </td>
    <td>
     <ul>
-     <li>Yet to be.</li>
+     <li>The focus for the next sprint will be to effectively divide the workload and put more hours towards the project.</li>
+     <li>The goals for the next sprint are finishing up the account system, implementing lootboxes, finishing the storage system and fixing any existing issues with the current code.</li>
     </ul>
    </td>
   </tr>
