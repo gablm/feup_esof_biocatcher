@@ -150,6 +150,10 @@ You can find below information and references related with the project managemen
     <ul>
      <li>The focus for the next sprint will be to effectively divide the workload and put more hours towards the project.</li>
      <li>The goals for the next sprint are finishing up the account system, implementing lootboxes, finishing the storage system and fixing any existing issues with the current code.</li>
+     <li>
+      For the next sprint, we should divide the stories into smaller tasks in order to be able to distribute and finish them in a more organized and faster way.
+      Additionally, we have to better divide workload and do it in a more timely manner.
+     </li>
     </ul>
    </td>
   </tr>
@@ -157,6 +161,14 @@ You can find below information and references related with the project managemen
 </table>
 
 ### Happiness meter
+
+The values for our happiness meter are anonymous and can be measured by the following scale:
+ - 1 Discouraged
+ - 2 Unsatisfied
+ - 3 Acceptable
+ - 4 Motivated
+ - 5 Enthusiastic
+    
 #### Sprint 1
-3 3 3 2 
+3, 3, 3, 2 & ? 
  
