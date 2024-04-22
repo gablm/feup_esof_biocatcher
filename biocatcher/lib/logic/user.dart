@@ -84,4 +84,20 @@ class User {
     res.update(resData);
     ownedAnimals = resData["animals"];
   }
+
+  static Future<User?> newUser(FirebaseFirestore firestore, String userId,
+      String nickname, String handle) async {
+    var data = {
+      "nickname": nickname,
+      "handle": handle,
+      "coins": 0,
+      "level": 0,
+      "picture": "https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png",
+      "animals": {}
+    };
+    var res = firestore.collection("profiles").doc(userId);
+    if ((await res.get()).exists) return null;
+    res.set(data);
+    return User(firestore, data);
+  }
 }

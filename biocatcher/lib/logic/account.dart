@@ -46,7 +46,10 @@ class Account {
     await _firestore.collection("profiles")
         .doc(userId).get()
         .then((value) {
-          if (value.data() == null) throw Exception("Invalid user id");
+          if (value.data() == null) {
+           signOut();
+           throw Exception("This SSO account is not linked to any BioCatcher account.");
+          }
           profile = logic.User(_firestore, value.data()!);
         }
     );
