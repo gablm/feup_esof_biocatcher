@@ -156,6 +156,20 @@ You can find below information and references related with the project managemen
     </ul>
    </td>
   </tr>
+  <tr>
+   <th>
+    Sprint 2 (v0.0.3)
+   </th>
+   <td>
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/913bf19d-8c59-4868-a629-61fd255d42d3">
+   </td>
+   <td>
+    - Yet to be
+   </td>
+   <td>
+    - Yet do be
+   </td>
+  </tr>
  </tbody>
 </table>
 
