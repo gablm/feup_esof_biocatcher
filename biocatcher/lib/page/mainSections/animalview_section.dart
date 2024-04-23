@@ -6,12 +6,17 @@ import '../../logic/animal.dart';
 import '../../logic/eventHandler.dart';
 
 class AnimalViewSection extends StatefulWidget {
-  AnimalViewSection({super.key, required this.animalId}) {
+  AnimalViewSection({
+    super.key,
+    required this.animalId,
+    this.goBack
+  }) {
     animal = Animal.animalCollection[animalId];
   }
 
   final String animalId;
   late final Animal? animal;
+  void Function()? goBack;
 
   @override
   State<AnimalViewSection> createState() => AnimalViewState();
@@ -84,7 +89,7 @@ class AnimalViewState extends State<AnimalViewSection> {
           automaticallyImplyLeading: false,
           elevation: 0,
           title: IconButton(
-            onPressed: () => EventHandler.changeSection.add("storage"),
+            onPressed: widget.goBack ?? () => EventHandler.changeSection.add("storage"),
             icon: const Icon(
               Icons.arrow_back,
               size: 20,

@@ -9,5 +9,4 @@ class EventHandler {
 
   static StreamController changeSection = StreamController.broadcast();
   static Stream get changeSectionStream => changeSection.stream;
-
 }

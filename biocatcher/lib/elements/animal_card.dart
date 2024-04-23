@@ -9,16 +9,19 @@ class AnimalCard extends StatelessWidget {
     super.key,
     required this.animalId,
     required level,
-    required void Function() this.onUpdate
+    required void Function() this.onUpdate,
+    bool showDetails = false
   }) {
     animal = Animal.animalCollection[animalId];
     _level = level.toDouble();
+    _showDetails = showDetails;
   }
 
   final String animalId;
   late double _level;
   late Animal? animal;
   late Function() onUpdate;
+  bool _showDetails = false;
   int currentCards = 10;
   int requiredCards = 100;
 
@@ -104,7 +107,8 @@ class AnimalCard extends StatelessWidget {
         ),
       );
     }
-    return Card(
+    if (_showDetails) {
+      return Card(
         child: Center(
           child: Column(
             children: [
@@ -190,7 +194,42 @@ class AnimalCard extends StatelessWidget {
             ],
           ),
         )
-    );
+      );
+    } else {
+      return Card(
+          child: GestureDetector(
+            onTap: () => EventHandler.changeSection.add("animal_view $animalId"),
+            child: Center(
+                child: Column(
+                    children: [
+                      Container(
+                          width: 175,
+                          height: 175,
+                          decoration: BoxDecoration(
+                            border: Border.all(),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image.network(
+                                  animal!.pictureUri,
+                                  fit: BoxFit.cover
+                              )
+                          )
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        animal!.name,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16
+                        ),
+                      )
+                    ]
+                )
+            )
+          )
+      );
+    }
   }
-
 }
