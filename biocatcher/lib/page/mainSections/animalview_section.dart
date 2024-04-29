@@ -76,6 +76,92 @@ class AnimalViewState extends State<AnimalViewSection> {
             shadows: const [Shadow(blurRadius: 10)]));
   }
 
+  Column getAnimalStatCol(String? type, double? base, double? scale) {
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            type ?? "???",
+            style: const TextStyle(
+                fontWeight: FontWeight.bold
+            ),
+          ),
+          Text(
+              "Base       $base"
+          ),
+          Text(
+              "Scaling   $scale"
+          )
+        ],
+    );
+  }
+
+  void showStats(BuildContext context) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) {
+          return Center(
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Theme.of(context).colorScheme.background
+              ),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Center(
+                      child: Text(
+                        "Animal In-Game Stats",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Center(child: Text("All attributes are dependant on level.")),
+                    const Center(child: Text("Stat = Base + Level * Scaling")),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        getAnimalStatCol("ATK",
+                            widget.animal?.stats.baseAtk,
+                            widget.animal?.stats.scalingAtk
+                        ),
+                        getAnimalStatCol("HP",
+                            widget.animal?.stats.baseHp,
+                            widget.animal?.stats.scalingHp
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        getAnimalStatCol("CRIT RATE",
+                            widget.animal?.stats.baseCritRate,
+                            widget.animal?.stats.scalingCritRate
+                        ),
+                        getAnimalStatCol("CRIT DMG",
+                            widget.animal?.stats.baseCritDmg,
+                            widget.animal?.stats.scalingCritDmg
+                        )
+                      ],
+                    ),
+                  ]
+              ),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     EventHandler.mainPageAppBar.add(false);
@@ -108,22 +194,38 @@ class AnimalViewState extends State<AnimalViewSection> {
                   child: GridTile(
                       footer: Container(
                           padding: const EdgeInsets.fromLTRB(32, 8, 32, 8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                widget.animal!.name,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.animal!.name,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                    ),
+                                  ),
+                                  RichText(
+                                      text: conservationStatusText(
+                                          widget.animal!.conservationStatus))
+                                ],
                               ),
-                              RichText(
-                                  text: conservationStatusText(
-                                      widget.animal!.conservationStatus))
+                              ElevatedButton(
+                                  onPressed: () => showStats(context),
+                                  child: const Text(
+                                    "Show stats",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                        color: Colors.black,
+                                      )
+                                  )
+                              )
                             ],
-                          )),
+                          ),
+                      ),
                       child: Image.network(
                         widget.animal!.pictureUri,
                         fit: BoxFit.cover,
