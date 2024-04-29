@@ -1,4 +1,3 @@
-
 import 'package:bio_catcher/elements/animal_card.dart';
 import 'package:bio_catcher/logic/eventHandler.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +35,7 @@ class StorageState extends State<StorageSection> {
                 animalId: animal.key,
                 level: animal.value,
                 onUpdate: () => setState(() {}),
+                showDetails: true,
             )
         ],
       ),
