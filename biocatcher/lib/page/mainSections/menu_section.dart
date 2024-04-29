@@ -1,3 +1,4 @@
+import 'package:bio_catcher/elements/decorated_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -85,6 +86,196 @@ class MenuState extends State<MenuSection> {
     setState(() {});
   }
 
+  void changeEmail() {
+    TextEditingController controller = TextEditingController();
+    bool visible = false;
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+      return Center(
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Theme.of(context).colorScheme.background
+          ),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Changing email",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  "Old email: ${Account.instance.currentUser?.email}",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Material(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Theme.of(context).colorScheme.primary,
+                  child: DecoratedTextField(
+                      field: "New Email",
+                      controller: controller,
+                      obscure: false
+                  ),
+                ),
+                const SizedBox(height: 10),
+                if (visible)
+                  const Text(
+                    "Invalid email or already in use",
+                    style: TextStyle(
+                        color: Colors.red,
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15
+                    ),
+                  ),
+                if (visible)
+                  const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                            "Close",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.inversePrimary,
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15
+                            )
+                        )
+                    ),
+                    ElevatedButton(
+                        onPressed: () async {
+                          if (await Account.instance.isEmailInUse(controller.text)) {
+                            visible = true;
+                            setState(() {});
+                            return;
+                          }
+                          if (context.mounted) Navigator.pop(context);
+                          await Account.instance.reAuthenticate();
+                          await Account.instance.currentUser
+                              ?.verifyBeforeUpdateEmail(controller.text);
+                        },
+                        child: Text(
+                            "Save",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.inversePrimary,
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15
+                            )
+                        )
+                    )
+                  ],
+                )
+              ]
+          ),
+        ),
+      );
+    });
+  }
+
+  void changePw() {
+    TextEditingController controller = TextEditingController();
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return Center(
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Theme.of(context).colorScheme.background
+              ),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Changing password",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          decoration: TextDecoration.none,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Material(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(context).colorScheme.primary,
+                      child: DecoratedTextField(
+                          field: "New Password",
+                          controller: controller,
+                          obscure: true
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                                "Close",
+                                style: TextStyle(
+                                    color: Theme.of(context).colorScheme.inversePrimary,
+                                    decoration: TextDecoration.none,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                )
+                            )
+                        ),
+                        ElevatedButton(
+                            onPressed: () async {
+                              Navigator.pop(context);
+                              await Account.instance.reAuthenticate();
+                              await Account.instance.currentUser
+                                  ?.updatePassword(controller.text);
+                            },
+                            child: Text(
+                                "Save",
+                                style: TextStyle(
+                                    color: Theme.of(context).colorScheme.inversePrimary,
+                                    decoration: TextDecoration.none,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                )
+                            )
+                        )
+                      ],
+                    ),
+                  ]
+              ),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     EventHandler.mainPageAppBar.add(false);
@@ -94,6 +285,7 @@ class MenuState extends State<MenuSection> {
         .any((element) => element.providerId == "google.com");
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -156,21 +348,24 @@ class MenuState extends State<MenuSection> {
                           Icons.email_outlined,
                           size: 24
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8, right: 8),
-                          child: Text(
-                            "${Account.instance.currentUser?.email}",
-                            style: TextStyle(
-                              fontSize: 17,
-                              color: Theme.of(context).colorScheme.inversePrimary,
-                              fontWeight: FontWeight.w600,
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: Text(
+                              "${Account.instance.currentUser?.email}",
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Theme.of(context).colorScheme.inversePrimary,
+                                fontWeight: FontWeight.w600,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                        ),
+                          )
+                        )
                       ]
                   ),
                   ElevatedButton(
-                      onPressed: null,
+                      onPressed: () => changeEmail(),
                       child: Text(
                         "Change",
                         style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
@@ -203,45 +398,12 @@ class MenuState extends State<MenuSection> {
                       ]
                   ),
                   ElevatedButton(
-                    onPressed: null,
+                    onPressed: () => changePw(),
                     child: Text(
                       "Change",
                       style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
                     ),
                   )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                            Icons.phone_android_outlined,
-                            size: 24
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8, right: 8),
-                          child: Text(
-                            Account.instance.currentUser?.phoneNumber ?? "Unlinked",
-                            style: TextStyle(
-                              fontSize: 17,
-                              color: Theme.of(context).colorScheme.inversePrimary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ]
-                  ),
-                  ElevatedButton(
-                    child: Text(
-                      false ? "Unlink" : "Link",
-                      style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-                    ),
-                    onPressed: null,
-                  ),
                 ],
               ),
               Divider(

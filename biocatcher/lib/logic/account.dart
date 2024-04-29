@@ -1,14 +1,14 @@
 import 'package:bio_catcher/logic/animal.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:bio_catcher/logic/user.dart' as logic;
 
 enum AuthType {
   password,
   twitter,
-  google,
-  phone
+  google
 }
 
 class Account {
@@ -17,6 +17,7 @@ class Account {
   static Account get instance => _instance;
   late FirebaseAuth _firebaseAuth;
   late FirebaseFirestore _firestore;
+  UserCredential? _credential;
   User? get currentUser => _firebaseAuth.currentUser;
   String get userId => _firebaseAuth.currentUser?.uid ?? "";
   List<UserInfo> get loginMethods => currentUser?.providerData ?? [];
@@ -82,18 +83,18 @@ class Account {
     );
 
     // Once signed in, return the UserCredential
-    await _firebaseAuth.signInWithCredential(credential);
+    _credential = await _firebaseAuth.signInWithCredential(credential);
     await loadUser();
   }
 
   Future<void> signInWithTwitter() async {
     TwitterAuthProvider twitterProvider = TwitterAuthProvider();
-    await _firebaseAuth.signInWithProvider(twitterProvider);
+    _credential = await _firebaseAuth.signInWithProvider(twitterProvider);
     await loadUser();
   }
 
   Future<void> signInWithEmailAndPassword(String email, String password) async {
-    await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+    _credential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
     await loadUser();
   }
 
@@ -119,10 +120,6 @@ class Account {
     TwitterAuthProvider twitterProvider = TwitterAuthProvider();
     await currentUser?.linkWithProvider(twitterProvider);
   }
-
-  Future<void> linkPhone(String phoneNumber) async {
-    await currentUser?.linkWithPhoneNumber(phoneNumber);
-  }
   //#endregion
 
   void deleteAccount()
@@ -144,5 +141,23 @@ class Account {
       default:
         throw Exception("Invalid unlink type");
     }
+  }
+
+  Future<void> reAuthenticate() async {
+    if (_credential?.credential == null) return;
+    await _firebaseAuth.currentUser?.reauthenticateWithCredential(_credential!.credential!);
+  }
+  
+  Future<bool> isEmailInUse(String email) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email,
+          password: "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+    } on FirebaseAuthException catch (e) {
+      return e.code != 'user-not-found';
+    } catch (e) {
+      return true;
+    }
+    return true;
   }
 }

@@ -54,9 +54,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
   );
-  FlutterError.onError = (FlutterErrorDetails details) {
+  /*FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.dumpErrorToConsole(details);
     runApp(ErrorShower(errorDetails: details));
-  };
+  };*/
   runApp(App());
 }

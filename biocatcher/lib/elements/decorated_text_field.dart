@@ -27,5 +27,6 @@ class DecoratedTextField extends StatelessWidget {
         hintText: field
       ),
       obscureText: obscure,
+      onTapOutside: (e) => FocusManager.instance.primaryFocus?.unfocus(),
     );
   }}

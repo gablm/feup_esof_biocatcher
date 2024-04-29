@@ -42,6 +42,7 @@ class MainState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: !showAppBar ? null : AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
