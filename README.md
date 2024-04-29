@@ -164,7 +164,7 @@ You can find below information and references related with the project managemen
     <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/913bf19d-8c59-4868-a629-61fd255d42d3">
    </td>
    <td>
-    - Yet to be
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/8a3be9df-d287-4092-b733-21b72bc05dc6">
    </td>
    <td>
     - Yet do be
