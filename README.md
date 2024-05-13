@@ -177,7 +177,7 @@ You can find below information and references related with the project managemen
     Sprint 3 (v0.0.4)
    </th>
    <td>
-    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/913bf19d-8c59-4868-a629-61fd255d42d3">
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/20ab85ff-f2dc-438c-92d9-f1067fafc3ba">
    </td>
    <td>
     - Yet do be
