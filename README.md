@@ -169,7 +169,7 @@ You can find below information and references related with the project managemen
     <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/8a3be9df-d287-4092-b733-21b72bc05dc6">
    </td>
    <td>
-    - Yet do be
+    - After this sprint, we must flesh out the combat system. Additionally, there is a need to focus in developing the map feature and adding the region labels to it.
    </td>
   </tr>
   <tr>
