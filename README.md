@@ -159,6 +159,8 @@ You can find below information and references related with the project managemen
   <tr>
    <th>
     Sprint 2 (v0.0.3)
+    <br>
+    <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/releases/tag/v0.0.3">Release</a>
    </th>
    <td>
     <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/913bf19d-8c59-4868-a629-61fd255d42d3">
@@ -170,18 +172,19 @@ You can find below information and references related with the project managemen
     - Yet do be
    </td>
   </tr>
+  <tr>
+   <th>
+    Sprint 3 (v0.0.4)
+   </th>
+   <td>
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/913bf19d-8c59-4868-a629-61fd255d42d3">
+   </td>
+   <td>
+    - Yet do be
+   </td>
+   <td>
+    - Yet do be
+   </td>
+  </tr>
  </tbody>
 </table>
-
-### Happiness meter
-
-The values for our happiness meter are anonymous and can be measured by the following scale:
- - 1 Discouraged
- - 2 Unsatisfied
- - 3 Acceptable
- - 4 Motivated
- - 5 Enthusiastic
-    
-#### Sprint 1
-3, 3, 3, 2 & ? 
- 
