@@ -1,4 +1,5 @@
 import 'package:bio_catcher/elements/animal_card.dart';
+import 'package:bio_catcher/logic/animal.dart';
 import 'package:bio_catcher/logic/eventHandler.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,11 @@ class StorageSection extends StatefulWidget {
 }
 
 class StorageState extends State<StorageSection> {
+  int getTotalPercentage() {
+    return ((Account.instance.profile?.ownedAnimals.length ?? 0)
+    / Animal.animalCollection.length * 100).round();
+  }
+
   @override
   Widget build(BuildContext context) {
     EventHandler.mainPageAppBar.add(true);
@@ -20,7 +26,7 @@ class StorageState extends State<StorageSection> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        title: const Text("Storage")
+        title: Text("Storage - ${getTotalPercentage()}% collected")
       ),
       body: GridView.count(
         padding: const EdgeInsets.all(10),
