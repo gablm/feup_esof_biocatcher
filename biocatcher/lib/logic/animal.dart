@@ -48,6 +48,7 @@ class Animal {
     avgLongevity = map["avgLongevity"].toDouble();
     origin = map["origin"];
     description = map["description"];
+    region = map["region"];
     stats = AnimalStats(map["stats"]);
   }
 
@@ -61,5 +62,6 @@ class Animal {
   late double avgLongevity;
   late String origin;
   late String description;
+  late String region;
   late AnimalStats stats;
 }

@@ -1,8 +1,10 @@
 import 'package:bio_catcher/elements/map_tile_provider.dart';
+import 'package:bio_catcher/logic/animal.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../logic/account.dart';
 import '../../logic/eventHandler.dart';
 
 class MapSection extends StatefulWidget {
@@ -16,10 +18,24 @@ class MapState extends State<MapSection> {
   late final String _mapStyle;
   late final GoogleMapController mapController;
   static const LatLng _ptCenter = LatLng(39.63870516395606, -7.873238660395145);
-  final Set<MapIndicator> places = {
+
+  int calculatePercentage(String city)
+  {
+    int animalsTotal = 0;
+    Animal.animalCollection.forEach((key, value) {
+      if (value.region == city) animalsTotal++;
+    });
+    int animalsCount = 0;
+    Account.instance.profile?.ownedAnimals.forEach((key, value) {
+      if (Animal.animalCollection[key]?.region == city) animalsCount++;
+    });
+    return (animalsCount / animalsTotal * 100).round();
+  }
+
+  late final Set<MapIndicator> places = {
     MapIndicator(
-        text: "Viseu",
-        offset: const Offset(55, 55),
+        text: "Viseu (${calculatePercentage("Viseu")}%)",
+        offset: const Offset(40, 55),
         x: 61,
         y: 48,
         fontSize: 20,
@@ -36,8 +52,8 @@ class MapState extends State<MapSection> {
         zoom: 8
     ),
     MapIndicator(
-        text: "17% completed",
-        offset: const Offset(105, 100),
+        text: "${calculatePercentage("Viseu")}% collected",
+        offset: const Offset(115, 100),
         x: 122,
         y: 96,
         fontSize: 25,
