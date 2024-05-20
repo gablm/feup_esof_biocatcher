@@ -74,34 +74,51 @@ class MapState extends State<MapSection> {
   @override
   Widget build(BuildContext context) {
     EventHandler.mainPageAppBar.add(true);
-    return GoogleMap(
-        onMapCreated: (GoogleMapController controller)
-        {
-          mapController = controller;
-          mapController.setMapStyle(_mapStyle);
-        },
-        initialCameraPosition: const CameraPosition(
-          target: _ptCenter,
-          zoom: 7.2,
-        ),
-        rotateGesturesEnabled: false,
-        cameraTargetBounds: CameraTargetBounds(
-            LatLngBounds(
-              northeast: const LatLng(41.97193822954311, -5.443835975660432),
-              southwest: const LatLng(36.532664187078055, -10.181156426221802),
+    return Scaffold(
+      body: GoogleMap(
+          onMapCreated: (GoogleMapController controller)
+          {
+            mapController = controller;
+            mapController.setMapStyle(_mapStyle);
+          },
+          initialCameraPosition: const CameraPosition(
+            target: _ptCenter,
+            zoom: 7.2,
+          ),
+          rotateGesturesEnabled: false,
+          cameraTargetBounds: CameraTargetBounds(
+              LatLngBounds(
+                northeast: const LatLng(41.97193822954311, -5.443835975660432),
+                southwest: const LatLng(36.532664187078055, -10.181156426221802),
+              )
+          ),
+          minMaxZoomPreference: const MinMaxZoomPreference(7.2, 10),
+          zoomControlsEnabled: false,
+          tileOverlays: {
+            TileOverlay(
+              tileOverlayId: const TileOverlayId("ProgressLabels"),
+              tileProvider: MapTileProvider(
+                  mapPlaces: places,
+                  showBorder: false
+              ),
             )
-        ),
-        minMaxZoomPreference: const MinMaxZoomPreference(7.2, 10),
-        zoomControlsEnabled: false,
-        tileOverlays: {
-          TileOverlay(
-            tileOverlayId: const TileOverlayId("ProgressLabels"),
-            tileProvider: MapTileProvider(
-                mapPlaces: places,
-                showBorder: false
+          }
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.green,
+          onPressed: () => Navigator.pushNamed(context, "/battle"),
+          label: const Text(
+            'Battle!',
+            style: TextStyle(
+              fontSize: 30
             ),
-          )
-        }
-      );
+          ),
+          icon: const Icon(
+            Icons.sports_mma_outlined,
+            size: 30,
+          ),
+      )
+    );
   }
 }
