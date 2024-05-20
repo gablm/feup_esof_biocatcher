@@ -14,6 +14,7 @@ class User {
     _level = map["level"].toDouble();
     picture = map["picture"];
     ownedAnimals = map["animals"];
+    ownedAnimalsCards = map["cards"];
   }
 
   late String nickname;
@@ -25,6 +26,7 @@ class User {
 
   // owned animals => (string animalId, double level)
   late Map<String, dynamic> ownedAnimals;
+  late Map<String, dynamic> ownedAnimalsCards;
 
   void addCoins(int coins) {
     _coins = _coins + coins < 0 ? 0 : _coins + coins;
@@ -73,6 +75,7 @@ class User {
     _level = map["level"].toDouble();
     picture = map["picture"];
     ownedAnimals = map["animals"];
+    ownedAnimalsCards = map["cards"];
   }
   
   Future<void> removeAnimal(String id) async {
@@ -81,8 +84,10 @@ class User {
     var resData = (await res.get()).data();
     if (resData == null) return;
     resData["animals"].remove(id);
+    resData["cards"].remove(id);
     res.update(resData);
     ownedAnimals = resData["animals"];
+    ownedAnimalsCards = resData["cards"];
   }
 
   static Future<User?> newUser(FirebaseFirestore firestore, String userId,
@@ -93,7 +98,8 @@ class User {
       "coins": 0,
       "level": 0,
       "picture": "https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png",
-      "animals": {}
+      "animals": {},
+      "cards": {}
     };
     var res = firestore.collection("profiles").doc(userId);
     if ((await res.get()).exists) return null;

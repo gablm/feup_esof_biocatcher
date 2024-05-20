@@ -40,7 +40,9 @@ class BattlePage extends StatefulWidget {
   late double enemyAvoid;
 
   late double userHp = user.stats.getActualHp(userLevel);
+  late double userFullHp = userHp;
   late double enemyHp = enemy.stats.getActualHp(enemyLevel);
+  late double enemyFullHp = enemyHp;
 
   GameState state = GameState.userPlaying;
   double roundCount = 0;
@@ -118,7 +120,7 @@ class BattlePage extends StatefulWidget {
     }
     roundCount += 0.5;
     if (state == GameState.userWin) {
-      gainedCoins = rng.nextInt(102) + 89;
+      gainedCoins = rng.nextInt(52) + 89;
       gainedXp = rng.nextDouble() / 5 + 0.5;
       Account.instance.profile?.addCoins(gainedCoins);
       Account.instance.profile?.addLevel(gainedXp);
@@ -187,21 +189,52 @@ class BattleState extends State<BattlePage> {
                 ),
               ),
             const SizedBox(height: 30),
-            Text(
-              "Enemy - ${widget.enemyHp.round()} HP",
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Theme.of(context).colorScheme.inversePrimary
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: LinearProgressIndicator(
+                        value: widget.userHp.round() / widget.userFullHp.round(),
+                        color: Colors.red,
+                        backgroundColor: Colors.black,
+                      )
+                  ),
+                  SizedBox(width: 50),
+                  Expanded(
+                      child: LinearProgressIndicator(
+                        value: widget.enemyHp.round() / widget.enemyFullHp.round(),
+                        color: Colors.red,
+                        backgroundColor: Colors.black,
+                      )
+                  )
+                ]
               ),
             ),
-            const SizedBox(height: 20),
-            Text(
-              "User - ${widget.userHp.round()} HP",
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Theme.of(context).colorScheme.inversePrimary
+            const SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "You - ${widget.userHp.round()}/${widget.userFullHp.round()} HP",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.inversePrimary
+                      ),
+                    ),
+                    SizedBox(width: 50),
+                    Text(
+                      "Enemy - ${widget.enemyHp.round()}/${widget.enemyFullHp.round()} HP",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.inversePrimary
+                      ),
+                    )
+                  ]
               ),
-            )
+            ),
           ],
         )
         : Column(
