@@ -26,7 +26,7 @@ class MapTileProvider implements TileProvider {
   }
 
   Set<MapIndicator> mapPlaces = {};
-  bool showBorder = false;
+  bool showBorder = true;
   static const int width = 500;
   static const int height = 500;
   static final Paint boxPaint = Paint();
@@ -59,6 +59,7 @@ class MapTileProvider implements TileProvider {
 
     if (showBorder) {
       canvas.drawRect(Rect.fromLTRB(0, 0, width.toDouble(), width.toDouble()), boxPaint);
+      print("x$x, y$y, zoom $zoom");
     }
 
     final ui.Picture picture = recorder.endRecording();

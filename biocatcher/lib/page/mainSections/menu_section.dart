@@ -286,7 +286,7 @@ class MenuState extends State<MenuSection> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
+      appBar: true ? null : AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.transparent,

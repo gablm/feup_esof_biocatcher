@@ -25,6 +25,24 @@ class MapState extends State<MapSection> {
         fontSize: 20,
         color: Colors.black,
         zoom: 7
+    ),
+    MapIndicator(
+        text: "Viseu",
+        offset: const Offset(150, 60),
+        x: 122,
+        y: 96,
+        fontSize: 35,
+        color: Colors.black,
+        zoom: 8
+    ),
+    MapIndicator(
+        text: "17% completed",
+        offset: const Offset(105, 100),
+        x: 122,
+        y: 96,
+        fontSize: 25,
+        color: Colors.black,
+        zoom: 8
     )
   };
 
@@ -62,7 +80,10 @@ class MapState extends State<MapSection> {
         tileOverlays: {
           TileOverlay(
             tileOverlayId: const TileOverlayId("ProgressLabels"),
-            tileProvider: MapTileProvider(mapPlaces: places),
+            tileProvider: MapTileProvider(
+                mapPlaces: places,
+                showBorder: false
+            ),
           )
         }
       );
