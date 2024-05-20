@@ -263,7 +263,10 @@ class BattleState extends State<BattlePage> {
             const SizedBox(width: 20),
             if (!widget.isOver)
             ElevatedButton.icon(
-              onPressed: () => Navigator.pushNamed(context, "/main"),
+              onPressed: () => setState(() {
+                widget.state = GameState.botWin;
+                widget.nextRound();
+              }),
               icon: const Icon(Icons.flag),
               label: const Text("Give up"),
               style: ElevatedButton.styleFrom(
