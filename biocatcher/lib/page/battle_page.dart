@@ -160,79 +160,159 @@ class BattleState extends State<BattlePage> {
               "Round ${widget.roundCount.round()}",
               style: TextStyle(
                   fontSize: 20,
-                  color: Theme.of(context).colorScheme.inversePrimary
+                  fontWeight: FontWeight.w700,
+                  color: Theme.of(context).colorScheme.inversePrimary,
               ),
             ),
-            const SizedBox(height: 5),
-            Text(
-              widget.getPhaseTitle(),
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Theme.of(context).colorScheme.inversePrimary
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                children: [
+                  Flexible(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            "YOU",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                            ),
+                          ),
+                          Text(
+                            "Lvl. ${widget.userLevel.round()}",
+                            style: const TextStyle(
+                                fontSize: 15
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Container(
+                              width: 175,
+                              height: 175,
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.network(
+                                      widget.user.pictureUri,
+                                      fit: BoxFit.cover
+                                  )
+                              )
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            widget.user.name,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          LinearProgressIndicator(
+                            value: widget.userHp.round() / widget.userFullHp.round(),
+                            color: Colors.black,
+                            backgroundColor: Colors.white,
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            "${widget.userHp.round()}/${widget.userFullHp.round()} HP",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).colorScheme.inversePrimary
+                            ),
+                          )
+                        ],
+                      )
+                  ),
+                  const SizedBox(width: 30),
+                  Flexible(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            "ENEMY",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                            ),
+                          ),
+                          Text(
+                            "Lvl. ${widget.enemyLevel.round()}",
+                            style: const TextStyle(
+                                fontSize: 15
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Container(
+                              width: 175,
+                              height: 175,
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.network(
+                                      widget.enemy.pictureUri,
+                                      fit: BoxFit.cover
+                                  )
+                              )
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            widget.enemy.name,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          LinearProgressIndicator(
+                            value: widget.enemyHp.round() / widget.enemyFullHp.round(),
+                            color: Colors.black,
+                            backgroundColor: Colors.white,
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            "${widget.enemyHp.round()}/${widget.enemyFullHp.round()} HP",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).colorScheme.inversePrimary
+                            ),
+                          )
+                        ],
+                      )
+                  ),
+                ]
               ),
             ),
             const SizedBox(height: 10),
             if (widget.isCrit)
               Text(
-                "Crit!",
+                "Critical hit!",
                 style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.inversePrimary
                 ),
               ),
             if (widget.isAvoided)
               Text(
-                "Attack was avoided!",
+                "The attack was avoided!",
                 style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).colorScheme.inversePrimary
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                 ),
               ),
-            const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                children: [
-                  Expanded(
-                      child: LinearProgressIndicator(
-                        value: widget.userHp.round() / widget.userFullHp.round(),
-                        color: Colors.red,
-                        backgroundColor: Colors.black,
-                      )
-                  ),
-                  SizedBox(width: 50),
-                  Expanded(
-                      child: LinearProgressIndicator(
-                        value: widget.enemyHp.round() / widget.enemyFullHp.round(),
-                        color: Colors.red,
-                        backgroundColor: Colors.black,
-                      )
-                  )
-                ]
-              ),
-            ),
-            const SizedBox(height: 5),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      "You - ${widget.userHp.round()}/${widget.userFullHp.round()} HP",
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context).colorScheme.inversePrimary
-                      ),
-                    ),
-                    SizedBox(width: 50),
-                    Text(
-                      "Enemy - ${widget.enemyHp.round()}/${widget.enemyFullHp.round()} HP",
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context).colorScheme.inversePrimary
-                      ),
-                    )
-                  ]
+            const SizedBox(height: 15),
+            Text(
+              widget.getPhaseTitle(),
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Theme.of(context).colorScheme.inversePrimary
               ),
             ),
           ],
