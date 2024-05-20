@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../elements/animal_card.dart';
-import '../logic/animal.dart';
+import '../../elements/animal_card.dart';
+import '../../logic/animal.dart';
 
 class AnimalWikiPage extends StatefulWidget {
   AnimalWikiPage({super.key});
@@ -20,7 +20,7 @@ class AnimalWikiPageState extends State<AnimalWikiPage> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           backgroundColor: Colors.transparent,
-          title: const Text("Animal Wiki")
+          title: const Text("Wiki - All Animals")
       ),
       body: GridView.count(
         padding: const EdgeInsets.all(10),
@@ -33,8 +33,8 @@ class AnimalWikiPageState extends State<AnimalWikiPage> {
           for (var animal in widget.animalMap.entries)
             AnimalCard(
               animalId: animal.key,
-              level: animal.value,
               onUpdate: () => setState(() {}),
+              level: 0,
             )
         ],
       ),

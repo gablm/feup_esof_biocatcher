@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../logic/account.dart';
 import '../logic/eventHandler.dart';
+import 'mainSections/animal_wiki_page.dart';
 import 'mainSections/error_section.dart';
 
 class MainPage extends StatefulWidget {
@@ -155,6 +156,7 @@ class MainState extends State<MainPage> {
         'storage' => const StorageSection(),
         'shop' => const ShopSection(),
         'animal_view' => AnimalViewSection(animalId: arg),
+        'animal_wiki' => AnimalWikiPage(),
         _ => const ErrorSection(error: 'An invalid page was reached.'),
       },
     );

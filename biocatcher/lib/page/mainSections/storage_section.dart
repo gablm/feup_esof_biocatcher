@@ -39,6 +39,15 @@ class StorageState extends State<StorageSection> {
             )
         ],
       ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.green,
+          onPressed: () {
+            setState(() {
+              EventHandler.changeSection.add("animal_wiki");
+            });
+          },
+          child: const Icon(Icons.book),
+        )
     );
     /*return const Center(
         child: Text('Storage', style: TextStyle(fontSize: 80))
