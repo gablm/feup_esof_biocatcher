@@ -102,6 +102,9 @@ You can find below information and references related with the project managemen
 - Product backlog and Sprint backlog in a [Github Projects board](https://github.com/orgs/FEUP-LEIC-ES-2023-24/projects/64);
 ### Release management
 - [v0.0.1 (increment #0)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/releases/tag/v0.0.1);
+- [v0.0.2 (increment #1)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/releases/tag/v0.0.2);
+- [v0.0.3 (increment #2)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/releases/tag/v0.0.3);
+- [v0.1.0 (Final increment / #3)](https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/releases/tag/v0.1.0);
 
 ### Sprint planning and retrospectives
 > Clicking any image will open them in full size.
@@ -174,7 +177,8 @@ You can find below information and references related with the project managemen
   </tr>
   <tr>
    <th>
-    Sprint 3 (v0.0.4)
+    Sprint 3 / Final Sprint (v0.1.0)
+    <a href="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/releases/tag/v0.1.0">Release</a>
    </th>
    <td>
     <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/20ab85ff-f2dc-438c-92d9-f1067fafc3ba">
