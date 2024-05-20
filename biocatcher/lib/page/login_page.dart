@@ -169,34 +169,7 @@ class LoginState extends State<LoginPage> {
                         controller: widget.passwordController,
                         obscure: true,
                       ),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 150,
-                            child: CheckboxListTile(
-                                dense: true,
-                                controlAffinity: ListTileControlAffinity.leading,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-                                title: Transform.translate(
-                                  offset: const Offset(-20, 1),
-                                  child: Text("Remember me"),
-                                ),
-                                value: false,
-                                onChanged: (keepLogin) {}
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: const Padding(
-                              padding: EdgeInsets.all(10.0),
-                              child: Text("Forgot your password?"),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 20),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
