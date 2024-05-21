@@ -324,10 +324,11 @@ class BattleState extends State<BattlePage> {
                 widget.state == GameState.botWin ? "You lose!" : "You win!",
                 style: TextStyle(
                     fontSize: 30,
+                    fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.inversePrimary
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 5),
               Text(
                 "Total number of rounds: ${widget.roundCount.round()}",
                 style: TextStyle(
@@ -335,21 +336,66 @@ class BattleState extends State<BattlePage> {
                     color: Theme.of(context).colorScheme.inversePrimary
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 40),
               Text(
-                "Coins won: ${widget.gainedCoins}",
+                "Rewards",
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.inversePrimary
                 ),
               ),
-              const SizedBox(height: 20),
-              Text(
-                "XP won: ${(widget.gainedXp * 100).round()} (${widget.gainedXp.toStringAsFixed(1)} levels)",
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Theme.of(context).colorScheme.inversePrimary
-                ),
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Coins",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Theme.of(context).colorScheme.inversePrimary
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "${widget.gainedCoins}",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Theme.of(context).colorScheme.inversePrimary
+                            ),
+                          ),
+                          const Icon(
+                            Icons.currency_bitcoin,
+                            color: Colors.yellow,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "XP",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).colorScheme.inversePrimary
+                      ),
+                    ),
+                    Text(
+                      "${(widget.gainedXp * 100).round()} (${widget.gainedXp.toStringAsFixed(1)} levels)",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).colorScheme.inversePrimary
+                      ),
+                    )
+                  ],
+                )
               ),
             ]
         ),
