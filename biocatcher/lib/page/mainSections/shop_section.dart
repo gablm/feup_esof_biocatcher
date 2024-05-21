@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../logic/eventHandler.dart';
 import '../../logic/lootBox.dart';
-import '../../logic/user.dart';
 import '../../logic/account.dart';
 
 class ShopSection extends StatefulWidget {
