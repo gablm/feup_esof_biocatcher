@@ -53,14 +53,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(),
       backgroundColor: Theme.of(context).colorScheme.primary,
-      appBar: AppBar(
-        title: const Text('Register'),
-      ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
-          children: <Widget>[
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Register',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            const SizedBox(height: 40),
             DecoratedTextField(
               field: "Name",
               controller: nameController,
@@ -84,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               controller: handleController,
               obscure: false,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
