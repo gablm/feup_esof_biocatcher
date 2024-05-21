@@ -23,7 +23,7 @@ class BattlePage extends StatefulWidget {
 
     int animalId = rng.nextInt(ownAnim?.length ?? 0);
     user = animCol[animalId.toString()]!;
-    userLevel = (ownAnim?[animalId.toString()]).toDouble();
+    userLevel = (ownAnim?[animalId.toString()] ?? 0).toDouble();
     userAvoid = rng.nextDouble() * 10;
 
     int enemyId = rng.nextInt(animCol.length);
