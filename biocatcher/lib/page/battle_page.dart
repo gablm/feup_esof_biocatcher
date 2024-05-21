@@ -22,7 +22,7 @@ class BattlePage extends StatefulWidget {
     var animCol = Animal.animalCollection;
 
     int animalId = rng.nextInt(ownAnim?.length ?? 0);
-    user = animCol[animalId.toString()]!;
+    user = animCol[ownAnim?.keys.elementAt(animalId)]!;
     userLevel = (ownAnim?[animalId.toString()] ?? 0).toDouble();
     userAvoid = rng.nextDouble() * 10;
 
