@@ -15,6 +15,8 @@ class AnimalCard extends StatelessWidget {
     animal = Animal.animalCollection[animalId];
     _level = level.toDouble();
     _showDetails = showDetails;
+    currentCards = Account.instance.profile?.ownedAnimalsCards[animalId] ?? 0;
+    requiredCards = (_level == 1 ? 10 : 20 * _level).round();
   }
 
   final String animalId;
@@ -22,8 +24,8 @@ class AnimalCard extends StatelessWidget {
   late Animal? animal;
   late Function() onUpdate;
   bool _showDetails = false;
-  int currentCards = 10;
-  int requiredCards = 100;
+  int currentCards = 0;
+  int requiredCards = 1;
 
   Future<void> deleteAnimal(BuildContext context) async {
     FocusManager.instance.primaryFocus?.unfocus();
@@ -98,7 +100,52 @@ class AnimalCard extends StatelessWidget {
     ));
   }
 
-  @override
+Future<void> upgradeAnimal(BuildContext context) async {
+  FocusManager.instance.primaryFocus?.unfocus();
+    Account.instance.profile?.setAnimalCards(animalId, currentCards - requiredCards);
+    _level += 1;
+    Account.instance.profile?.addAnimal(animalId, _level);
+    onUpdate();
+    return;
+  }
+  showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) => Center(
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.red
+          ),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.warning,
+                  color: Colors.white,
+                  size: 50,
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  "Not enough cards to upgrade!",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.bold,
+                      backgroundColor: Colors.red,
+                      fontSize: 15
+                  ),
+                ),
+              ]
+          ),
+        ),
+      ));
+}
+
+@override
   Widget build(BuildContext context) {
     if (animal == null) {
       return const Center(
@@ -174,7 +221,7 @@ class AnimalCard extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: null,
+                    onPressed: () => upgradeAnimal(context),
                     icon: Icon(
                       Icons.upgrade,
                       size: 30,

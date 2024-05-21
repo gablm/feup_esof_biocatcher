@@ -89,6 +89,7 @@ class User {
     ownedAnimals = resData["animals"];
     ownedAnimalsCards = resData["cards"];
   }
+
   Future<void> addAnimal(String id, double level) async {
     var res = _firestore.collection("profiles").doc(Account.instance.userId);
     var resData = (await res.get()).data();
@@ -102,6 +103,21 @@ class User {
 
     // Update the local ownedAnimals map
     ownedAnimals = resData["animals"];
+  }
+
+  Future<void> setAnimalCards(String id, int cards) async {
+    var res = _firestore.collection("profiles").doc(Account.instance.userId);
+    var resData = (await res.get()).data();
+    if (resData == null) return;
+
+    resData["cards"][id] = cards;
+
+    // Update the Firestore document with the modified animal data
+    await res.update(resData);
+
+    // Update the local ownedAnimals map
+    ownedAnimalsCards = resData["cards"];
+
   }
 
   static Future<User?> newUser(FirebaseFirestore firestore, String userId,
