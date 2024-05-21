@@ -160,4 +160,39 @@ class Account {
     }
     return true;
   }
+
+  static Future<void> registerUser(String name, String email, String password, String handle) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim(),
+      );
+
+      String userId = userCredential.user?.uid ?? "";
+
+      var userData = {
+        'nickname': name.trim(),
+        'handle': handle.trim(),
+        'coins': 600,
+        'level': 1,
+        'picture': 'https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png',
+        'cards': {},
+        'animals': {}
+      };
+
+      Account.instance._firebaseAuth.signInWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+
+      await FirebaseFirestore.instance.collection('profiles').doc(userId).set(userData);
+
+      Account.instance.signOut();
+
+      Account.instance.signInWithEmailAndPassword(email, password);
+
+    } catch (e) {
+      throw Exception('Failed to register: $e');
+    }
+  }
 }

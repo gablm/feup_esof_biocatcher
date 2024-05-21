@@ -1,6 +1,7 @@
 import 'package:bio_catcher/elements/decorated_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:bio_catcher/logic/register_logic.dart';
+
+import '../logic/account.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -12,16 +13,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController handleController = TextEditingController();
-  final RegisterLogic _registerLogic = RegisterLogic();
 
   void _register() async {
     try {
-      await _registerLogic.registerUser(
+      await Account.registerUser(
         nameController.text,
         emailController.text,
         passwordController.text,
         handleController.text,
       );
+
+      if (!context.mounted) return;
+      Navigator.pushNamed(context, "/main");
     } catch (e) {
       _showErrorDialog(e.toString());
     }

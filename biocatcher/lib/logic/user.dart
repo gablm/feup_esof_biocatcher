@@ -117,7 +117,6 @@ class User {
 
     // Update the local ownedAnimals map
     ownedAnimalsCards = resData["cards"];
-
   }
 
   static Future<User?> newUser(FirebaseFirestore firestore, String userId,

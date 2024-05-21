@@ -73,7 +73,7 @@ class MainState extends State<MainPage> {
                   icon: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
                       child: Image.network(
-                        Account.instance.profile!.picture,
+                        Account.instance.profile?.picture ?? "https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png",
                         fit: BoxFit.cover,
                         width: 24,
                         height: 24,
