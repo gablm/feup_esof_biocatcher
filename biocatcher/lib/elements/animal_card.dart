@@ -102,9 +102,9 @@ class AnimalCard extends StatelessWidget {
 
 Future<void> upgradeAnimal(BuildContext context) async {
   if (currentCards >= requiredCards) {
-    Account.instance.profile?.setAnimalCards(animalId, currentCards - requiredCards);
+    await Account.instance.profile?.setAnimalCards(animalId, currentCards - requiredCards);
     _level += 1;
-    Account.instance.profile?.addAnimal(animalId, _level);
+    await Account.instance.profile?.addAnimal(animalId, _level);
     onUpdate();
     return;
   }
