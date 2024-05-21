@@ -9,13 +9,14 @@ List<int> rareAnimals = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
 List<int> commonAnimals = List.generate(50, (index) => index + 36);
 
 class LootBox {
-  late List<int> lootPool;
+  late String name;
+  late int price;
   late List<double> weights;
 
-  LootBox(this.lootPool, this.weights);
+  LootBox(this.name, this.price, this.weights);
 
   int weightedProb() {
-    double totalWeight = weights.reduce((a, b) => a+b );
+    double totalWeight = weights.reduce((a, b) => a + b);
     double p = random.nextDouble() * totalWeight;
     double runningTotal = 0;
     for (int i = 0; i < weights.length; i++) {
@@ -55,11 +56,13 @@ class LootBox {
 void main() {
   List<String> tiers = ["Legendary", "Epic", "Rare", "Common"];
   LootBox cheapLootBox = LootBox(
-    List.generate(300, (index) => index + 1),
-    [1.0, 2.0, 5.0, 10.0]
+    'Cheap Loot Box',
+    100,
+    [1.0, 2.0, 5.0, 10.0],
   );
   LootBox expensiveLootBox = LootBox(
-    List.generate(300, (index) => index +1),
-    [5.0, 10.0, 2.0, 1.0]
+    'Expensive Loot Box',
+    200,
+    [5.0, 10.0, 2.0, 1.0],
   );
 }

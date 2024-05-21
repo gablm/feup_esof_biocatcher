@@ -84,6 +84,20 @@ class User {
     res.update(resData);
     ownedAnimals = resData["animals"];
   }
+  Future<void> addAnimal(String id, double level) async {
+    var res = _firestore.collection("profiles").doc(Account.instance.userId);
+    var resData = (await res.get()).data();
+    if (resData == null) return;
+
+    // Update the animal's level regardless of whether it already exists
+    resData["animals"][id] = level;
+
+    // Update the Firestore document with the modified animal data
+    await res.update(resData);
+
+    // Update the local ownedAnimals map
+    ownedAnimals = resData["animals"];
+  }
 
   static Future<User?> newUser(FirebaseFirestore firestore, String userId,
       String nickname, String handle) async {
