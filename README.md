@@ -186,10 +186,12 @@ You can find below information and references related with the project managemen
     <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/20ab85ff-f2dc-438c-92d9-f1067fafc3ba">
    </td>
    <td>
-    - Yet do be
+    <img src="https://github.com/FEUP-LEIC-ES-2023-24/2LEIC05T4/assets/44784408/bcc995df-52d5-4cca-97de-3b771c93edae">
    </td>
    <td>
-    - Yet do be
+    <ul>
+     <li>Yet to be.</li>
+    </ul>
    </td>
   </tr>
  </tbody>
