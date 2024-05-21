@@ -3,7 +3,6 @@ import 'package:bio_catcher/elements/oauth_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bio_catcher/logic/account.dart';
-import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -182,10 +181,7 @@ class LoginState extends State<LoginPage> {
                               ),
                               minimumSize: const Size(150, 40),
                             ),
-                            onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => RegisterScreen()),
-                            ),
+                            onPressed: () => Navigator.pushNamed(context, "/register"),
                             child: Text("Register",
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.inversePrimary,

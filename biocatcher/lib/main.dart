@@ -3,6 +3,7 @@ import 'package:bio_catcher/page/load_page.dart';
 import 'package:bio_catcher/page/login_page.dart';
 import 'package:bio_catcher/page/main_page.dart';
 import 'package:bio_catcher/page/mainSections/error_section.dart';
+import 'package:bio_catcher/page/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,8 @@ class App extends StatelessWidget {
       routes: {
         '/': (context) => LoadPage(),
         '/login': (context) => LoginPage(),
-        '/main': (context) => MainPage()
+        '/main': (context) => MainPage(),
+        '/register': (context) => RegisterScreen()
       },
       builder: (context, widget) {
         ErrorWidget.builder = (errorDetails) => ErrorSection(error: errorDetails.toStringShort());
