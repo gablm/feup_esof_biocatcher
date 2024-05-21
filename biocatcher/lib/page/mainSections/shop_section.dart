@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../logic/lootBox.dart';
 import '../../logic/account.dart';
+import '../../logic/animal.dart';
 
 class ShopSection extends StatefulWidget {
   const ShopSection({Key? key}) : super(key: key);
@@ -56,7 +57,7 @@ class _ShopSectionState extends State<ShopSection> {
                   }
 
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('You bought ${lootBox.name}!'),
+                    content: Text('You bought ${lootBox.name} and won a ${Animal.animalCollection[animalIdString]?.name}'),
                   ));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
