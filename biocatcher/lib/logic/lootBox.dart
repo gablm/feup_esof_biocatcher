@@ -2,11 +2,11 @@ import 'dart:math';
 
 Random random = Random();
 
-List<int> allAnimals = [0, 1, 2];
-List<int> legendaryAnimals = [0, 1, 2];
-List<int> epicAnimals = [0, 1, 2];
-List<int> rareAnimals = [0, 1, 2];
-List<int> commonAnimals = [0, 1, 2];
+List<int> allAnimals = [0, 1, 2, 3, 4, 5];
+List<int> legendaryAnimals = [0, 1];
+List<int> epicAnimals = [2, 3];
+List<int> rareAnimals = [4, 5];
+List<int> commonAnimals = [3, 4, 5];
 
 class LootBox {
   late String name;
