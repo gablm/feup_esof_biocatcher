@@ -1,3 +1,4 @@
+import 'package:bio_catcher/page/battle_page.dart';
 import 'package:bio_catcher/page/mainSections/animal_wiki_page.dart';
 import 'package:bio_catcher/page/load_page.dart';
 import 'package:bio_catcher/page/login_page.dart';
@@ -24,7 +25,8 @@ class App extends StatelessWidget {
         '/': (context) => LoadPage(),
         '/login': (context) => LoginPage(),
         '/main': (context) => MainPage(),
-        '/register': (context) => RegisterScreen()
+        '/register': (context) => RegisterScreen(),
+        '/battle': (context) => BattlePage()
       },
       builder: (context, widget) {
         ErrorWidget.builder = (errorDetails) => ErrorSection(error: errorDetails.toStringShort());

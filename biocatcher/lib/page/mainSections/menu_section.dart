@@ -286,28 +286,6 @@ class MenuState extends State<MenuSection> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: true ? null : AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        title: Column(
-          children: [
-            Text(
-                "UserId ${Account.instance.userId}",
-                style: const TextStyle(
-                  fontSize: 15,
-                )
-            ),
-            for (UserInfo info in Account.instance.loginMethods)
-              Text(
-                  "${info.providerId} - ${info.uid}" ,
-                  style: const TextStyle(
-                    fontSize: 15,
-                  )
-              )
-          ],
-        ),
-      ),
       body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           child: Column(

@@ -2,20 +2,21 @@ import 'dart:math';
 
 Random random = Random();
 
-List<int> allAnimals = List.generate(100, (index) => index + 1);
-List<int> legendaryAnimals = [1, 2, 3, 4, 5];
-List<int> epicAnimals = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-List<int> rareAnimals = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35];
-List<int> commonAnimals = List.generate(50, (index) => index + 36);
+List<int> allAnimals = [0, 1, 2];
+List<int> legendaryAnimals = [0, 1, 2];
+List<int> epicAnimals = [0, 1, 2];
+List<int> rareAnimals = [0, 1, 2];
+List<int> commonAnimals = [0, 1, 2];
 
 class LootBox {
-  late List<int> lootPool;
+  late String name;
+  late int price;
   late List<double> weights;
 
-  LootBox(this.lootPool, this.weights);
+  LootBox(this.name, this.price, this.weights);
 
   int weightedProb() {
-    double totalWeight = weights.reduce((a, b) => a+b );
+    double totalWeight = weights.reduce((a, b) => a + b);
     double p = random.nextDouble() * totalWeight;
     double runningTotal = 0;
     for (int i = 0; i < weights.length; i++) {
@@ -52,14 +53,4 @@ class LootBox {
   }
 }
 
-void main() {
-  List<String> tiers = ["Legendary", "Epic", "Rare", "Common"];
-  LootBox cheapLootBox = LootBox(
-    List.generate(300, (index) => index + 1),
-    [1.0, 2.0, 5.0, 10.0]
-  );
-  LootBox expensiveLootBox = LootBox(
-    List.generate(300, (index) => index +1),
-    [5.0, 10.0, 2.0, 1.0]
-  );
-}
+
