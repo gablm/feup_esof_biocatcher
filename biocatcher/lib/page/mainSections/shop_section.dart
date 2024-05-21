@@ -24,6 +24,7 @@ class _ShopSectionState extends State<ShopSection> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Shop'),
       ),
       body: ListView.builder(
