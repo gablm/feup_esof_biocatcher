@@ -1,6 +1,5 @@
-import 'package:bio_catcher/elements/decorated_text_field.dart';
 import 'package:flutter/material.dart';
-
+import 'package:bio_catcher/elements/decorated_text_field.dart';
 import '../logic/account.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -56,35 +55,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-          title: const Text('Register')
+        title: const Text('Register'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             DecoratedTextField(
-                field: "Name",
-                controller: nameController,
-                obscure: false
+              field: "Name",
+              controller: nameController,
+              obscure: false,
             ),
             const SizedBox(height: 20),
-            TextField(
+            DecoratedTextField(
+              field: "Email",
               controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              obscure: false,
             ),
-            TextField(
+            const SizedBox(height: 20),
+            DecoratedTextField(
+              field: "Password",
               controller: passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
+              obscure: true,
             ),
-            TextField(
+            const SizedBox(height: 20),
+            DecoratedTextField(
+              field: "Handle (e.g., @username)",
               controller: handleController,
-              decoration: InputDecoration(labelText: 'Handle (e.g., @username)'),
+              obscure: false,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _register,
-              child: Text('Register'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  shadowColor: Colors.greenAccent,
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0)
+                  ),
+                  minimumSize: const Size(150, 40),
+                ),
+                onPressed: _register,
+                child: Text("Register",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                      fontSize: 20,
+                    )
+                )
             ),
           ],
         ),
