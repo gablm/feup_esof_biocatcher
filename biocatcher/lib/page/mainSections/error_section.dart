@@ -1,7 +1,6 @@
 import 'package:bio_catcher/main.dart';
 import 'package:flutter/material.dart';
 
-import '../../logic/account.dart';
 import '../../logic/eventHandler.dart';
 
 class ErrorSection extends StatefulWidget {
