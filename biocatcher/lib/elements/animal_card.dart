@@ -101,7 +101,6 @@ class AnimalCard extends StatelessWidget {
   }
 
 Future<void> upgradeAnimal(BuildContext context) async {
-  FocusManager.instance.primaryFocus?.unfocus();
   if (currentCards >= requiredCards) {
     Account.instance.profile?.setAnimalCards(animalId, currentCards - requiredCards);
     _level += 1;
@@ -109,6 +108,7 @@ Future<void> upgradeAnimal(BuildContext context) async {
     onUpdate();
     return;
   }
+  FocusManager.instance.primaryFocus?.unfocus();
   showDialog(
       barrierDismissible: true,
       context: context,
