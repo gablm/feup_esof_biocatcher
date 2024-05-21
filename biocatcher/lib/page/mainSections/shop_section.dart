@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import '../../logic/lootBox.dart';
 import '../../logic/account.dart';
@@ -46,7 +48,8 @@ class _ShopSectionState extends State<ShopSection> {
                   if (Account.instance.profile?.ownedAnimals.containsKey(animalIdString) ?? false) {
                     // If the user already owns the item, level it up by 1
                     int currentCards = Account.instance.profile?.ownedAnimalsCards[animalIdString] ?? 0;
-                    Account.instance.profile?.setAnimalCards(animalIdString, currentCards + 10);
+                    var RanG = Random();
+                    Account.instance.profile?.setAnimalCards(animalIdString, currentCards + RanG.nextInt(5) + 5);
                   } else {
                     // If the user doesn't own the item, add it to the inventory with a level of 1
                     Account.instance.profile?.addAnimal(animalIdString, 1);
