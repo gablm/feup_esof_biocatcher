@@ -190,7 +190,9 @@ You can find below information and references related with the project managemen
    </td>
    <td>
     <ul>
-     <li>Yet to be.</li>
+     <li>After this sprint, we finally almost fully implemented nearly all of the essetials features for the app. The app is quite ready to be shipped, with some bugs.</li>
+     <li>Given we had one or two more sprints, we are confident we could deliver a full fledge game with a higher in-depth combat system and a fully implemented database.</li>
+     <li>Finally, this project fommented our group-working skills, a essential thing in the work world. Being then a extremely positive impact on our methodology of work.</li>
     </ul>
    </td>
   </tr>
